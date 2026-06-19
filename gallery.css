@@ -1,0 +1,232 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY: 짙은 다크 모드로 무드 통일 */
+body {
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
+  min-height: 100vh;
+}
+
+/* HEADER: 고정 높이 80px 및 투명 블러 테두리 적용 */
+.gallery-header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* HOME BUTTON */
+.home-btn {
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: rgba(158, 255, 122, 0.3);
+  transform: translateY(-2px);
+}
+
+/* MAIN */
+main {
+  padding-top: 130px; /* 헤더 공간 분리 */
+}
+
+/* UPLOAD SECTION: 입력 창 구역 디자인 개선 */
+.upload-section {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px 30px;
+}
+
+.upload-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* FILE CHOOSE BUTTON */
+.file-btn {
+  background: rgba(158, 255, 122, 0.15);
+  color: #9eff7a;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.file-btn:hover {
+  background: rgba(158, 255, 122, 0.25);
+  transform: translateY(-2px);
+}
+
+#fileName {
+  color: #aaa;
+  font-size: 15px;
+}
+
+/* TEXT INPUT */
+#imageText {
+  padding: 12px 20px;
+  width: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#imageText:focus {
+  border-color: rgba(158, 255, 122, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* UPLOAD BUTTON */
+#uploadBtn {
+  background: #9eff7a;
+  color: #121212;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+#uploadBtn:hover {
+  background: #b6ff9c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.3);
+}
+
+/* EMPTY MESSAGE */
+#emptyMessage {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin-top: 60px;
+}
+
+/* GALLERY GRID: 반응형 그리드 정렬 */
+.gallery-grid {
+  width: 1200px;
+  margin: 30px auto 80px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 0 30px;
+}
+
+/* GALLERY CARD: 반투명 보더 및 다크 카드 질감 매칭 */
+.gallery-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  background: rgba(158, 255, 122, 0.04);
+  border-color: rgba(158, 255, 122, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* CARD IMAGE */
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* CARD INFO & TEXT */
+.card-info {
+  padding: 20px;
+}
+
+.gallery-card p {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #bbb;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 48px;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(5px);
+  color: #ff6b6b;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-card:hover .delete-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete-btn:hover {
+  background: #ff6b6b;
+  color: white;
+  transform: scale(1.05);
+}

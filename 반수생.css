@@ -1,0 +1,280 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY: 메인 페이지와 동일한 모던 블랙 배경으로 통일 */
+body {
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
+}
+
+/* HEADER: 기존 네비게이션바의 높이와 블러 효과 계승 */
+.monitor-header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO STYLE */
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+/* HOME BUTTON: 우측 상단 홈 버튼 링크 스타일 최적화 */
+.home-btn {
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: rgba(158, 255, 122, 0.3);
+  transform: translateY(-2px);
+}
+
+/* MAIN */
+main {
+  padding-top: 150px; /* 고정된 헤더 영역 확보 */
+}
+
+/* CONTAINER */
+.container-layout {
+  width: 1200px;
+  margin: 0 auto 80px auto;
+}
+
+/* PAGE TITLE */
+.page-title {
+  text-align: center;
+  color: #9eff7a;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+/* LIZARD LIST */
+.lizard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* LIZARD CARD: 투명 유리 질감 및 얇은 화이트 보더 통일 */
+.lizard-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.lizard-card:hover {
+  transform: translateY(-5px);
+  background: rgba(158, 255, 122, 0.08);
+  border-color: rgba(158, 255, 122, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* CARD IMAGE */
+.lizard-img {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* CARD INFO */
+.lizard-info {
+  flex: 1;
+}
+
+.lizard-info h3 {
+  font-size: 30px;
+  color: #9eff7a;
+  margin-bottom: 15px;
+}
+
+.lizard-info p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #bbb; /* 완벽하게 닫힌 중괄호 구조 확인 완료 */
+}
+
+/* FOOTER */
+footer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  color: #666;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY: 메인 페이지와 동일한 모던 블랙 배경으로 통일 */
+body {
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
+}
+
+/* HEADER: 기존 네비게이션바의 높이와 블러 효과 계승 */
+.monitor-header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO STYLE */
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+/* HOME BUTTON: 우측 상단 홈 버튼 링크 스타일 최적화 */
+.home-btn {
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: rgba(158, 255, 122, 0.3);
+  transform: translateY(-2px);
+}
+
+/* MAIN */
+main {
+  padding-top: 150px; /* 고정된 헤더 영역 확보 */
+}
+
+/* CONTAINER */
+.container-layout {
+  width: 1200px;
+  margin: 0 auto 80px auto;
+}
+
+/* PAGE TITLE */
+.page-title {
+  text-align: center;
+  color: #9eff7a;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+/* LIZARD LIST */
+.lizard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* LIZARD CARD: 투명 유리 질감 및 얇은 화이트 보더 통일 */
+.lizard-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.lizard-card:hover {
+  transform: translateY(-5px);
+  background: rgba(158, 255, 122, 0.08);
+  border-color: rgba(158, 255, 122, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* CARD IMAGE */
+.lizard-img {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* CARD INFO */
+.lizard-info {
+  flex: 1;
+}
+
+.lizard-info h3 {
+  font-size: 30px;
+  color: #9eff7a;
+  margin-bottom: 15px;
+}
+
+.lizard-info p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #bbb; /* 완벽하게 닫힌 중괄호 구조 확인 완료 */
+}
+
+/* FOOTER */
+footer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  color: #666;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

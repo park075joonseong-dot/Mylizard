@@ -1,0 +1,223 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.gallery-header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* HOME BUTTON */
+.home-btn {
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: rgba(158, 255, 122, 0.3);
+  transform: translateY(-2px);
+}
+
+/* MAIN & CONTAINER */
+main {
+  padding-top: 130px;
+}
+
+.viva-container {
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* QUIZ CARD (질문지 보드) */
+.quiz-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 35px;
+  border-radius: 20px;
+}
+
+.quiz-title {
+  font-size: 26px;
+  color: #9eff7a;
+  margin-bottom: 10px;
+}
+
+.quiz-subtitle {
+  font-size: 15px;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+/* QUIZ INPUTS COMPONENTS */
+.quiz-group {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.quiz-group select {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+}
+
+.quiz-group select:focus {
+  border-color: rgba(158, 255, 122, 0.5);
+}
+
+/* RADIO BUTTONS */
+.radio-wrap {
+  display: flex;
+  gap: 30px;
+  padding: 5px 0;
+}
+
+.radio-wrap label {
+  font-size: 16px;
+  font-weight: normal;
+  color: #bbb;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-wrap input[type="radio"] {
+  accent-color: #9eff7a; /* 네온 그린 체크 라디오 스타일 */
+  width: 18px;
+  height: 18px;
+}
+
+/* RECOMMEND ACTION BUTTON */
+#recommendBtn {
+  width: 100%;
+  background: #9eff7a;
+  color: #121212;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+#recommendBtn:hover {
+  background: #b6ff9c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(158, 255, 122, 0.3);
+}
+
+/* RESULT CARD (결과 노출 창) */
+.result-card {
+  background: rgba(158, 255, 122, 0.03);
+  border: 1px solid rgba(158, 255, 122, 0.15);
+  padding: 35px;
+  border-radius: 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.result-title {
+  font-size: 24px;
+  color: #9eff7a;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.result-box {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #9eff7a;
+}
+
+.result-box h4 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.highlight-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #b6ff9c;
+}
+
+.deco-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deco-list li {
+  font-size: 15px;
+  color: #ddd;
+  padding-left: 5px;
+}
+
+/* FADE-IN ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
