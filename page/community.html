@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Lizard Community</title>
+    <link rel="stylesheet" href="/css/community.css" />
+  </head>
+
+  <body>
+    <header class="gallery-header">
+      <div class="logo">My Lizard Community</div>
+      <a href="/Home/Home.html" class="home-btn">홈으로</a>
+    </header>
+
+    <main>
+      <section class="post-section">
+        <div class="post-write-wrap">
+          <input type="text" id="postTitle" placeholder="제목을 입력하세요" />
+          <textarea id="postContent" placeholder="내용을 입력하세요"></textarea>
+          <button id="postBtn">글 작성</button>
+        </div>
+      </section>
+
+      <section id="postList"></section>
+    </main>
+
+    <script>
+      const postTitle = document.getElementById("postTitle");
+      const postContent = document.getElementById("postContent");
+      const postBtn = document.getElementById("postBtn");
+      const postList = document.getElementById("postList");
+
+      let posts = JSON.parse(localStorage.getItem("communityPosts")) || [];
+
+      posts.forEach((post) => {
+        createPost(post);
+      });
+
+      postBtn.addEventListener("click", () => {
+        const title = postTitle.value.trim();
+        const content = postContent.value.trim();
+
+        if (!title || !content) {
+          alert("제목과 내용을 입력해주세요.");
+          return;
+        }
+
+        const post = {
+          title,
+          content,
+          comments: [],
+        };
+
+        posts.unshift(post);
+        localStorage.setItem("communityPosts", JSON.stringify(posts));
+        createPost(post, true);
+
+        postTitle.value = "";
+        postContent.value = "";
+      });
+
+      function savePosts() {
+        localStorage.setItem("communityPosts", JSON.stringify(posts));
+      }
+
+      function createPost(post, prepend = false) {
+        const card = document.createElement("div");
+        card.className = "post-card";
+
+        card.innerHTML = `
+          <div class="post-header">
+            <h3>${post.title}</h3>
+            <button class="delete-post-btn">삭제</button>
+          </div>
+          <p class="post-body-content">${post.content}</p>
+          <div class="comments"></div>
+          
+          <div class="comment-input-wrap">
+            <input class="comment-input" placeholder="댓글 작성...">
+            <button class="comment-btn">댓글 달기</button>
+          </div>
+        `;
+
+        const commentsDiv = card.querySelector(".comments");
+
+        // 게시글 삭제
+        card.querySelector(".delete-post-btn").addEventListener("click", () => {
+          if (!confirm("게시글을 삭제하시겠습니까?")) {
+            return;
+          }
+
+          const index = posts.indexOf(post);
+          if (index > -1) {
+            posts.splice(index, 1);
+          }
+
+          savePosts();
+          card.remove();
+        });
+
+        // 기존 댓글 불러오기
+        post.comments.forEach((comment) => {
+          createComment(comment, post, commentsDiv);
+        });
+
+        // 댓글 작성
+        card.querySelector(".comment-btn").addEventListener("click", () => {
+          const input = card.querySelector(".comment-input");
+          const text = input.value.trim();
+
+          if (!text) return;
+
+          post.comments.push(text);
+          savePosts();
+          createComment(text, post, commentsDiv);
+          input.value = "";
+        });
+
+        if (prepend) {
+          postList.prepend(card);
+        } else {
+          postList.appendChild(card);
+        }
+      }
+
+      function createComment(text, post, commentsDiv) {
+        const div = document.createElement("div");
+        div.className = "comment";
+
+        div.innerHTML = `
+          <span>${text}</span>
+          <button class="delete-comment-btn">✕</button>
+        `;
+
+        div
+          .querySelector(".delete-comment-btn")
+          .addEventListener("click", () => {
+            const index = post.comments.indexOf(text);
+            if (index > -1) {
+              post.comments.splice(index, 1);
+            }
+
+            savePosts();
+            div.remove();
+          });
+
+        commentsDiv.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

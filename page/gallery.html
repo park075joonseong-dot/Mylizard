@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Lizard Gallery</title>
+    <link rel="stylesheet" href="/css/gallery.css" />
+  </head>
+
+  <body>
+    <header class="gallery-header">
+      <div class="logo">My Lizard Gallery</div>
+      <a href="/Home/Home.html" class="home-btn">홈으로</a>
+    </header>
+
+    <main>
+      <section class="upload-section">
+        <div class="upload-wrap">
+          <input type="file" id="upload" accept="image/*" hidden />
+
+          <label for="upload" class="file-btn">사진 선택</label>
+          <span id="fileName">선택된 파일 없음</span>
+
+          <input
+            type="text"
+            id="imageText"
+            placeholder="사진 설명을 입력하세요"
+          />
+          <button id="uploadBtn">업로드</button>
+        </div>
+      </section>
+
+      <p id="emptyMessage">아직 업로드된 사진이 없습니다.</p>
+
+      <section id="gallery" class="gallery-grid"></section>
+    </main>
+
+    <script>
+      const upload = document.getElementById("upload");
+      const uploadBtn = document.getElementById("uploadBtn");
+      const imageText = document.getElementById("imageText");
+      const gallery = document.getElementById("gallery");
+      const fileName = document.getElementById("fileName");
+      const emptyMessage = document.getElementById("emptyMessage");
+
+      // 파일명 표시
+      upload.addEventListener("change", () => {
+        fileName.textContent =
+          upload.files.length > 0 ? upload.files[0].name : "선택된 파일 없음";
+      });
+
+      //
+
+      // 빈 갤러리 확인
+      function checkEmpty() {
+        emptyMessage.style.display =
+          gallery.children.length === 0 ? "block" : "none";
+      }
+
+      // 저장된 이미지 불러오기
+      window.addEventListener("load", () => {
+        const savedImages =
+          JSON.parse(localStorage.getItem("galleryImages")) || [];
+
+        savedImages.forEach((item) => {
+          createCard(item.src, item.text);
+        });
+
+        checkEmpty();
+      });
+
+      // 업로드
+      uploadBtn.addEventListener("click", () => {
+        const file = upload.files[0];
+        const text = imageText.value.trim();
+
+        // 파일 체크
+        if (!file) {
+          alert("이미지를 선택해주세요.");
+          return;
+        }
+
+        // 설명 체크
+        if (!text) {
+          alert("사진 설명을 입력해주세요.");
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const item = {
+            src: e.target.result,
+            text: text,
+          };
+
+          // 화면에 추가
+          createCard(item.src, item.text);
+
+          // localStorage 저장
+          const savedImages =
+            JSON.parse(localStorage.getItem("galleryImages")) || [];
+
+          savedImages.push(item);
+
+          localStorage.setItem("galleryImages", JSON.stringify(savedImages));
+
+          // 입력 초기화
+          upload.value = "";
+          imageText.value = "";
+          fileName.textContent = "선택된 파일 없음";
+
+          checkEmpty();
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      // 카드 생성
+      function createCard(src, text) {
+        const card = document.createElement("div");
+        card.className = "gallery-card";
+
+        card.innerHTML = `
+    <img src="${src}" alt="업로드 이미지">
+    <button class="delete-btn">✕</button>
+    <p>${text}</p>
+  `;
+
+        // 삭제 기능
+        card.querySelector(".delete-btn").addEventListener("click", () => {
+          card.remove();
+
+          let savedImages =
+            JSON.parse(localStorage.getItem("galleryImages")) || [];
+
+          savedImages = savedImages.filter((item) => item.src !== src);
+
+          localStorage.setItem("galleryImages", JSON.stringify(savedImages));
+
+          checkEmpty();
+        });
+
+        gallery.prepend(card);
+      }
+    </script>
+  </body>
+</html>
