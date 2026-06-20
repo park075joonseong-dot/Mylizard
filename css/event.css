@@ -59,7 +59,7 @@ main {
 }
 
 .container-layout {
-  width: 1200px;
+  width: 1000px; /* 가로형 카드 정렬을 위해 너비를 살짝 최적화 */
   margin: 0 auto 80px auto;
   padding: 0 30px;
 }
@@ -78,38 +78,41 @@ main {
   margin-bottom: 50px;
 }
 
-/* EVENT GRID */
-.event-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 25px;
+/* EVENT LIST (가로 배치용 세로 정렬 구조) */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-/* EVENT CARD */
+/* EVENT CARD (가로로 긴 카드 구조로 전면 변경) */
 .event-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 20px;
   overflow: hidden;
   transition: 0.3s;
-  display: flex;
-  flex-direction: column;
+  display: flex; /* 내부 요소들을 가로 배치로 */
+  height: 200px; /* 카드 자체의 일정한 높이 부여 */
 }
 
 .event-card:hover {
-  transform: translateY(-5px);
+  transform: translateX(
+    8px
+  ); /* 가로형 카드에 맞춰 오른쪽으로 자연스럽게 이동 */
   background: rgba(158, 255, 122, 0.02);
   border-color: rgba(158, 255, 122, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* POSTER */
+/* POSTER (카드의 왼쪽 영역 차지) */
 .poster-wrap {
   position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
+  width: 150px; /* 가로 폭 고정 */
+  height: 100%;
   overflow: hidden;
   background: #1e1e1e;
+  flex-shrink: 0; /* 이미지 영역이 찌그러지지 않게 설정 */
 }
 
 .event-poster {
@@ -123,11 +126,12 @@ main {
   transform: scale(1.05);
 }
 
-/* EVENT INFO */
+/* EVENT INFO (카드의 오른쪽 정보 영역) */
 .event-info {
-  padding: 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* 텍스트 수직 중앙 정렬 */
   flex-grow: 1;
 }
 
@@ -137,160 +141,29 @@ main {
   font-weight: bold;
   padding: 4px 8px;
   border-radius: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   background: rgba(158, 255, 122, 0.15);
   color: #9eff7a;
 }
 
 .event-info h3 {
-  font-size: 17px;
+  font-size: 20px;
   color: #fff;
-  margin-bottom: 12px;
-  line-height: 1.4;
+  margin-bottom: 8px;
 }
 
 .event-date,
 .event-place {
   font-size: 13px;
   color: #aaa;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.event-place {
-  margin-bottom: 20px;
-}
-
-/* ACTION BUTTON */
-.detail-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: auto;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.3s;
-}
-
-.detail-btn:hover {
-  background: #9eff7a;
-  color: #121212;
-  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.2);
-}
-
-/* MODAL POPUP SYSTEM */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 850px;
-  max-width: 90%;
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden;
-  transform: scale(0.9);
-  transition: 0.3s ease;
-}
-
-.modal-overlay.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  color: white;
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
-  z-index: 10;
-}
-
-.modal-close:hover {
-  background: #ff6b6b;
-}
-
-.modal-body {
-  display: flex;
-}
-
-.modal-poster-side {
-  width: 40%;
-  background: #121212;
-}
-
-.modal-poster-side img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.modal-info-side {
-  width: 60%;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-#modalTitle {
-  font-size: 26px;
-  color: #9eff7a;
-  margin-bottom: 20px;
-  padding-right: 20px;
-}
-
-.m-date,
-.m-place {
-  font-size: 15px;
-  color: #ccc;
-  margin-bottom: 10px;
-}
-
-.m-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 20px 0;
-}
-
-.m-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #aaa;
-  white-space: pre-wrap;
+.event-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #888;
+  margin-top: 8px;
 }
 
 /* FOOTER */
