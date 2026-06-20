@@ -9,7 +9,6 @@
 
 body {
   font-family: sans-serif;
-  /* 메인 페이지와 일치하는 모던 다크 배경색 설정 (배경 이미지 레이어 조절) */
   background:
     linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
     url(img/backgound.png);
@@ -30,7 +29,7 @@ b {
    ========================================== */
 .header {
   width: 100%;
-  position: fixed; /* 상단 고정 */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -44,7 +43,6 @@ b {
   padding: 20px 50px;
 }
 
-/* PAGE TITLE */
 .page-title {
   text-align: center;
   color: #9eff7a;
@@ -54,7 +52,7 @@ b {
 .header h1 {
   font-size: 26px;
   font-weight: bold;
-  color: #ffffff; /* 로고 스타일로 통일 */
+  color: #ffffff;
 }
 
 .home-btn {
@@ -81,9 +79,9 @@ b {
    ========================================== */
 .container {
   width: 100%;
-  max-width: 1200px; /* 고정 크기 제거 -> 반응형 대응 */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 140px 20px 60px 20px; /* 헤더 고정에 따른 상단 패딩 확보 */
+  padding: 140px 20px 60px 20px;
 }
 
 /* ==========================================
@@ -141,9 +139,9 @@ b {
   margin-bottom: 0;
 }
 
-/* 추천 매장 리스트 스타일링 */
+/* 추천 매장 리스트 */
 .info-box ul {
-  list-style: none; /* 기본 점 제거 */
+  list-style: none;
 }
 
 .info-box li {
@@ -157,10 +155,23 @@ b {
 
 .info-box li::before {
   content: "•";
-  color: #9eff7a; /* 리스트 점을 네온 연두색으로 변경 */
+  color: #9eff7a;
   font-weight: bold;
   position: absolute;
   left: 0;
+}
+
+/* 추천 매장 링크 스타일 추가 */
+.info-box li a {
+  color: #9eff7a;
+  text-decoration: none;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
+}
+
+.info-box li a:hover {
+  text-decoration: underline;
+  opacity: 0.85;
 }
 
 /* ==========================================
@@ -178,7 +189,6 @@ b {
 
 .morph-grid {
   display: grid;
-  /* 화면 크기에 따라 자동으로 열 개수 조절 (반응형 완전 대응) */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
@@ -212,7 +222,7 @@ b {
 .morph-card h3 {
   padding: 25px 25px 10px 25px;
   font-size: 22px;
-  color: #ffffff; /* 가독성을 위해 흰색 처리하되 호버 시 포인트 */
+  color: #ffffff;
 }
 
 .morph-card:hover h3 {
@@ -224,19 +234,19 @@ b {
   font-size: 15px;
   line-height: 1.6;
   color: #aaa;
-  flex-grow: 1; /* 카드 내용 높이 균등 맞춤 */
+  flex-grow: 1;
 }
 
 .price {
   display: block;
   padding: 20px 25px 25px 25px;
-  color: #9eff7a; /* 올드한 gold 색상에서 세련된 연두색 포인드로 변경 */
+  color: #9eff7a;
   font-size: 16px;
   font-weight: bold;
 }
 
 /* ==========================================
-   7. MOBILE RESPONSIVE (미디어 쿼리 휴대폰 대응)
+   7. MOBILE RESPONSIVE (미디어 쿼리)
    ========================================== */
 @media (max-width: 768px) {
   .header {
@@ -252,7 +262,7 @@ b {
   }
 
   .hero-img {
-    height: 250px; /* 모바일에서는 이미지 높이 축소 */
+    height: 250px;
     border-radius: 15px;
   }
 
@@ -262,7 +272,7 @@ b {
   }
 
   .morph-grid {
-    grid-template-columns: 1fr; /* 모바일은 무조건 한 줄 */
+    grid-template-columns: 1fr;
     gap: 20px;
   }
 }
