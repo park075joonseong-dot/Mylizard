@@ -16,7 +16,7 @@
     <main>
       <section class="viva-container">
         <div class="quiz-card">
-          <h2 class="quiz-title">🦎 맞춤형 사육장 매니저</h2>
+          <h2 class="quiz-title">맞춤형 사육장 매니저</h2>
           <p class="quiz-subtitle">
             반려 파충류의 환경을 선택하면 알맞은 비바리움을 추천합니다.
           </p>
@@ -81,15 +81,15 @@
         </div>
 
         <div id="resultView" class="result-card" style="display: none">
-          <h2 class="result-title">✨ 추천 비바리움 가이드</h2>
+          <h2 class="result-title">추천 비바리움 가이드</h2>
 
           <div class="result-box">
-            <h4>📦 추천 사육장 조합</h4>
+            <h4>추천 사육장 조합</h4>
             <p id="cageResult" class="highlight-text"></p>
           </div>
 
           <div class="result-box">
-            <h4>🌿 인조식물 및 꾸미기 용품 추천</h4>
+            <h4>인조식물 및 꾸미기 용품 추천</h4>
             <ul id="decoResult" class="deco-list"></ul>
           </div>
         </div>
@@ -115,40 +115,40 @@
         // 1. 사육장 조합 매칭 계산
         if (isArboreal === "O") {
           cageText = `[적층형/세로형] 유리 혹은 아크릴 포맥스 하이(High)형 ${size} 사육장`;
-          decoItems.push("🌳 정글 바인 (구부릴 수 있는 인조 넝쿨 줄기)");
-          decoItems.push("🍃 흡착식 벽면 인조 아이비/스킨답서스 잎사귀");
-          decoItems.push("🦎 높은 곳에 매다는 인조 코코넛 은신처");
+          decoItems.push(" 정글 바인 (구부릴 수 있는 인조 넝쿨 줄기)");
+          decoItems.push(" 흡착식 벽면 인조 아이비/스킨답서스 잎사귀");
+          decoItems.push(" 높은 곳에 매다는 인조 코코넛 은신처");
         } else {
           cageText = `[가로형/와이드] 포맥스 또는 유리 와이드(Wide)형 ${size} 사육장`;
-          decoItems.push("🪵 바닥 유목 및 넙적한 코르크 보드");
-          decoItems.push("🌿 바닥에 깔아두는 인조 고사리류 / 볼 부쉬 식물");
-          decoItems.push("🪨 안정감을 주는 다공질 바위 무늬 인조 은신처");
+          decoItems.push(" 바닥 유목 및 넙적한 코르크 보드");
+          decoItems.push(" 바닥에 깔아두는 인조 고사리류 / 볼 부쉬 식물");
+          decoItems.push(" 안정감을 주는 다공질 바위 무늬 인조 은신처");
         }
 
         // 2. 히팅 옵션 추가
         if (needsHeat === "O") {
           cageText += " + 상단 소켓 타공 및 안전망 세트";
           decoItems.push(
-            "☀️ 주간용 스팟 램프 또는 야간용 세라믹 히터 + 자동 온도 조절기",
+            " 주간용 스팟 램프 또는 야간용 세라믹 히터 + 자동 온도 조절기",
           );
         } else {
-          decoItems.push("💡 내부 관찰 및 식물 무드를 위한 안전 LED 바 조명");
+          decoItems.push(" 내부 관찰 및 식물 무드를 위한 안전 LED 바 조명");
         }
 
         // 3. 바닥재 옵션 추가
         if (needsSubstrate === "O") {
           if (needsHeat === "O") {
             decoItems.push(
-              "🪵 습도 및 먼지 관리에 좋은 바크 또는 코코피트 바닥재",
+              " 습도 및 먼지 관리에 좋은 바크 또는 코코피트 바닥재",
             );
           } else {
             decoItems.push(
-              "🪵 습계형 파충류용 수분 유지 코코허스크 또는 황토 매트",
+              " 습계형 파충류용 수분 유지 코코허스크 또는 황토 매트",
             );
           }
         } else {
           decoItems.push(
-            "🧼 위생적이고 세척이 쉬운 파충류 전용 키친타월 또는 친환경 펠트 매트",
+            " 위생적이고 세척이 쉬운 파충류 전용 키친타월 또는 친환경 펠트 매트",
           );
         }
 
