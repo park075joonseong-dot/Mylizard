@@ -10,7 +10,6 @@ body {
   background-color: #121212;
   font-family: sans-serif;
   color: white;
-  min-height: 100vh;
 }
 
 /* HEADER: 고정 높이 80px 및 상단 투명 블러 테두리 적용 */
