@@ -1,178 +1,235 @@
-/* RESET */
+/* ==========================================================================
+   01. 글로벌 기본 초기화 및 기본 톤 설정 (RESET & BODY)
+   ========================================================================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* 모든 요소의 기본 바깥 여백을 0으로 초기화 */
+  padding: 0; /* 모든 요소의 기본 안쪽 여백을 0으로 초기화 */
+  box-sizing: border-box; /* 패딩과 테두리 두께를 너비(width)에 포함시켜 크기 왜곡 방지 */
 }
 
-/* BODY */
 body {
-  background-color: #121212;
-  font-family: sans-serif;
-  color: white;
+  background-color: #121212; /* 전체 사이트 콘셉트와 일치하는 다크 모드 배경색 설정 */
+  font-family: sans-serif; /* 고딕 계열의 깔끔한 기본 폰트 지정 */
+  color: white; /* 기본 글자 색상을 흰색으로 설정 */
 }
 
-/* HEADER */
+/* ==========================================================================
+   02. 상단 고정 헤더 영역 (HEADER)
+   ========================================================================== */
 .event-header {
-  width: 100%;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background: rgba(18, 18, 18, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 0 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%; /* 헤더의 가로 너비를 화면 전체(100%)로 설정 */
+  height: 80px; /* 헤더의 세로 높이를 80픽셀로 고정 */
+  position: fixed; /* 스크롤을 내려도 항상 화면 최상단에 고정 */
+  top: 0; /* 화면의 가장 맨 위(0)에 밀착 */
+  left: 0; /* 화면의 가장 왼쪽(0)에 밀착 */
+  z-index: 1000; /* 본문 카드가 헤더 위로 겹쳐 올라오지 않도록 레이어 순위(우선순위) 지정 */
+  background: rgba(
+    18,
+    18,
+    18,
+    0.8
+  ); /* 뒷배경이 은은하게 비치는 80% 투명도의 어두운 배경 */
+  backdrop-filter: blur(
+    10px
+  ); /* 반투명 배경 너머의 본문을 10픽셀만큼 흐리게 처리하는 고급스러운 무드 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 헤더 아래쪽에 아주 미세한 흰색 테두리 선 추가 */
+  padding: 0 50px; /* 헤더 내부의 좌우에 50픽셀의 여백 확보 */
+  display: flex; /* 내부 요소들을 정렬하기 위해 플렉스 박스 레이아웃 사용 */
+  justify-content: space-between; /* 로고와 홈 버튼을 좌우 양 끝으로 배치 */
+  align-items: center; /* 플렉스 박스 내부 아이템들을 세로축 기준 가운데 정렬 */
 }
 
 .logo {
-  font-size: 32px;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: 32px; /* 로고의 글자 크기를 32픽셀로 설정 */
+  font-weight: bold; /* 로고 글자를 두껍게 설정 */
+  color: #ffffff; /* 로고 색상을 흰색으로 설정 */
 }
 
-/* HOME BUTTON */
+/* [컴포넌트] 홈으로 버튼 스타일 */
 .home-btn {
-  text-decoration: none;
-  color: #9eff7a;
-  background: rgba(158, 255, 122, 0.15);
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: 0.3s;
+  text-decoration: none; /* 링크(<a>)의 기본 밑줄 제거 */
+  color: #9eff7a; /* 메인 포인트 테마 컬러인 네온 그린(#9eff7a) 지정 */
+  background: rgba(
+    158,
+    255,
+    122,
+    0.15
+  ); /* 네온 그린 색상에 15% 투명도를 준 반투명 배경 */
+  padding: 10px 20px; /* 버튼 내부 여백 (위아래 10픽셀, 좌우 20픽셀) */
+  border-radius: 12px; /* 버튼 모서리를 12픽셀만큼 둥글게 깎음 */
+  font-size: 16px; /* 글자 크기를 16픽셀로 설정 */
+  font-weight: bold; /* 글자를 두껍게 설정 */
+  transition: 0.3s; /* 상태 변화(호버 등)가 0.3초 동안 부드럽게 일어나도록 설정 */
 }
 
 .home-btn:hover {
-  background: rgba(158, 255, 122, 0.3);
-  transform: translateY(-2px);
+  background: rgba(
+    158,
+    255,
+    122,
+    0.3
+  ); /* 마우스를 올렸을 때 배경 투명도를 30%로 올려 더 진하게 만듦 */
+  transform: translateY(
+    -2px
+  ); /* 호버 시 Y축(위쪽)으로 2픽셀만큼 살짝 떠오르는 모션 부여 */
 }
 
-/* MAIN LAYOUT */
+/* ==========================================================================
+   03. 메인 콘텐츠 및 레이아웃 타이틀 (MAIN & TITLE)
+   ========================================================================== */
 main {
-  padding-top: 140px;
+  padding-top: 140px; /* 고정형(fixed) 헤더의 높이를 고려해 본문이 가려지지 않도록 윗여백 확보 */
 }
 
 .container-layout {
-  width: 1000px; /* 가로형 카드 정렬을 위해 너비를 살짝 최적화 */
-  margin: 0 auto 80px auto;
-  padding: 0 30px;
+  width: 1000px; /* 가로형 카드 정렬을 위해 본문 전체 가로 너비를 1000픽셀로 최적화 */
+  margin: 0 auto 80px auto; /* 바깥 여백 (위 0, 좌우 auto로 중앙 정렬, 아래 80픽셀) */
+  padding: 0 30px; /* 컨테이너 내부 좌우에 30픽셀의 여백 추가 */
 }
 
 .page-title {
-  text-align: center;
-  color: #9eff7a;
-  font-size: 36px;
-  margin-bottom: 10px;
+  text-align: center; /* 페이지 대제목을 가운데 정렬 */
+  color: #9eff7a; /* 제목 색상을 네온 그린으로 설정 */
+  font-size: 36px; /* 글자 크기를 36픽셀로 크게 키움 */
+  margin-bottom: 10px; /* 아래쪽 서브타이틀과의 간격을 위해 10픽셀 여백 추가 */
 }
 
 .page-subtitle {
-  text-align: center;
-  color: #aaa;
-  font-size: 16px;
-  margin-bottom: 50px;
+  text-align: center; /* 페이지 소제목을 가운데 정렬 */
+  color: #aaa; /* 글자 색상을 연한 회색(#aaa)으로 흐리게 설정 */
+  font-size: 16px; /* 글자 크기를 16픽셀로 설정 */
+  margin-bottom: 50px; /* 아래쪽 카드 리스트와의 간격을 위해 50픽셀 여백 확보 */
 }
 
-/* EVENT LIST (가로 배치용 세로 정렬 구조) */
+/* ==========================================================================
+   04. 이벤트 리스트 및 가로형 카드 UI (EVENT LIST & CARD)
+   ========================================================================== */
+/* 카드들을 세로로 길게 나열하는 리스트 묶음 영역 */
 .event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  display: flex; /* 카드들을 정렬하기 위해 플렉스 박스 레이아웃 사용 */
+  flex-direction: column; /* 정렬 방향을 세로로 지정하여 카드를 위에서 아래로 차곡차곡 쌓음 */
+  gap: 30px; /* 카드와 카드 사이의 수직 간격을 30픽셀로 고정 */
 }
 
-/* EVENT CARD (가로로 긴 카드 구조로 전면 변경) */
+/* [컴포넌트] 개별 이벤트 카드 (가로로 긴 와이드 구조) */
 .event-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: 0.3s;
-  display: flex; /* 내부 요소들을 가로 배치로 */
-  height: 200px; /* 카드 자체의 일정한 높이 부여 */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.04
+  ); /* 카드 배경을 아주 은은한 투명 흰색(4%)으로 설정 */
+  border: 1px solid rgba(255, 255, 255, 0.03); /* 카드 테두리에 은은한 선 추가 */
+  border-radius: 20px; /* 카드 테두리 사각 모서리를 20픽셀만큼 둥글게 만듦 */
+  overflow: hidden; /* 내부 포스터 이미지 모서리가 카드의 둥근 테두리에 맞춰 깔끔하게 깎이도록 처리 */
+  transition: 0.3s; /* 호버 시 일어나는 변화를 0.3초 동안 부드럽게 표현 */
+  display: flex; /* 카드 내부 요소(왼쪽 포스터, 오른쪽 정보)들을 가로(좌우)로 배치 */
+  height: 200px; /* 모든 이벤트 카드가 일정한 높이를 가지도록 200픽셀로 고정 */
 }
 
+/* 이벤트 카드 마우스 호버 효과 */
 .event-card:hover {
-  transform: translateX(
-    8px
-  ); /* 가로형 카드에 맞춰 오른쪽으로 자연스럽게 이동 */
-  background: rgba(158, 255, 122, 0.02);
-  border-color: rgba(158, 255, 122, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  /* 가로형 카드 형태에 맞춰 위가 아니라 오른쪽(X축)으로 8픽셀 부드럽게 미끄러지는 독특한 연출 */
+  transform: translateX(8px);
+  background: rgba(
+    158,
+    255,
+    122,
+    0.02
+  ); /* 배경색에 네온 그린 빛이 미세하게(2%) 감돌도록 변경 */
+  border-color: rgba(
+    158,
+    255,
+    122,
+    0.2
+  ); /* 카드 테두리 선을 네온 그린 빛으로 살짝 변경 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 카드 하단에 부드럽고 묵직한 입체 그림자 부여 */
 }
 
-/* POSTER (카드의 왼쪽 영역 차지) */
+/* ==========================================================================
+   05. 카드 내부 상세 요소 (POSTER & INFO)
+   ========================================================================== */
+/* POSTER: 카드의 왼쪽 포스터 영역 */
 .poster-wrap {
-  position: relative;
-  width: 150px; /* 가로 폭 고정 */
-  height: 100%;
-  overflow: hidden;
-  background: #1e1e1e;
-  flex-shrink: 0; /* 이미지 영역이 찌그러지지 않게 설정 */
+  position: relative; /* 내부에 추가 요소를 배치할 때 기준점이 될 수 있도록 설정 */
+  width: 150px; /* 포스터 이미지가 가로로 차지할 영역을 150픽셀로 고정 */
+  height: 100%; /* 높이는 부모 카드 높이(200px)를 100% 다 채우도록 설정 */
+  overflow: hidden; /* 포스터 확대 애니메이션 시 이미지가 박스 바깥으로 삐져나가지 않도록 커트 */
+  background: #1e1e1e; /* 이미지가 로딩되기 전 보일 어두운 배경색 지정 */
+  flex-shrink: 0; /* 우측 텍스트가 아무리 길어져도 왼쪽 포스터 영역이 찌그러지거나 줄어들지 않게 고정 */
 }
 
 .event-poster {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.5s ease;
+  width: 100%; /* 이미지 가로 폭을 .poster-wrap 너비에 100% 맞춤 */
+  height: 100%; /* 이미지 세로 높이를 .poster-wrap 높이에 100% 맞춤 */
+  object-fit: cover; /* 원본 비율을 유지하면서 고정된 포스터 영역에 꽉 차도록 이미지 중심을 기준으로 채움 */
+  transition: 0.5s ease; /* 확대/축소 모션이 0.5초 동안 부드럽고 자연스럽게(ease) 일어나도록 설정 */
 }
 
+/* 카드가 호버되었을 때(.event-card:hover) 왼쪽 포스터 이미지(.event-poster)만 1.05배로 미세하게 확대되는 연출 */
 .event-card:hover .event-poster {
   transform: scale(1.05);
 }
 
-/* EVENT INFO (카드의 오른쪽 정보 영역) */
+/* EVENT INFO: 카드의 오른쪽 상세 정보 구역 */
 .event-info {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* 텍스트 수직 중앙 정렬 */
-  flex-grow: 1;
+  padding: 25px; /* 정보 글자들이 카드 테두리에 붙지 않도록 사방에 25픽셀 여백 설정 */
+  display: flex; /* 내부 텍스트 요소들을 정렬하기 위해 플렉스 박스 사용 */
+  flex-direction: column; /* 태그, 제목, 일시 등을 위에서 아래로 나란히 나열 */
+  justify-content: center; /* 카드 200px 높이 내에서 콘텐츠들이 세로 기준 정중앙에 모이도록 처리 */
+  flex-grow: 1; /* 포스터(150px)가 차지하고 남은 우측 공간을 전부 설명 칸으로 가득 채움 */
 }
 
+/* [컴포넌트] 이벤트 상태 및 성격 태그 (D-day 또는 진행여부 등) */
 .event-tag {
-  align-self: flex-start;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 6px;
-  margin-bottom: 8px;
-  background: rgba(158, 255, 122, 0.15);
-  color: #9eff7a;
+  align-self: flex-start; /* 부모가 flex-direction: column이므로, 한 줄 전체를 채우지 않고 글자 크기만큼만 가로폭을 가지게 고정 */
+  font-size: 11px; /* 태그 글자 크기를 11픽셀로 작고 아담하게 설정 */
+  font-weight: bold; /* 태그 글자를 두껍게 설정 */
+  padding: 4px 8px; /* 태그 블록 내부 여백 (위아래 4픽셀, 좌우 8픽셀) */
+  border-radius: 6px; /* 태그 모서리를 6픽셀만큼 살짝 라운딩 처리 */
+  margin-bottom: 8px; /* 아래쪽 제목과의 간격을 위해 8픽셀 여백 추가 */
+  background: rgba(
+    158,
+    255,
+    122,
+    0.15
+  ); /* 네온 그린 색상에 15% 투명도를 준 은은한 배경색 */
+  color: #9eff7a; /* 태그 텍스트 색상을 포인트 네온 그린으로 설정 */
 }
 
+/* 박람회 / 모임 제목 */
 .event-info h3 {
-  font-size: 20px;
-  color: #fff;
-  margin-bottom: 8px;
+  font-size: 20px; /* 이벤트 제목 글자 크기를 20픽셀로 설정 */
+  color: #fff; /* 제목 글자 색상을 흰색으로 설정 */
+  margin-bottom: 8px; /* 아래쪽 일시/장소 안내 텍스트와의 간격을 위해 8픽셀 여백 추가 */
 }
 
+/* 일시 및 장소 안내 텍스트 */
 .event-date,
 .event-place {
-  font-size: 13px;
-  color: #aaa;
-  margin-bottom: 4px;
+  font-size: 13px; /* 안내 텍스트 글자 크기를 13픽셀로 설정 */
+  color: #aaa; /* 글자 색상을 밝은 회색으로 설정하여 제목보다 한 단계 가독성 낮춤 */
+  margin-bottom: 4px; /* 줄 사이사이에 4픽셀의 미세한 간격 추가 */
 }
 
+/* 이벤트 한 줄 설명 */
 .event-desc {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #888;
-  margin-top: 8px;
+  font-size: 13px; /* 설명 글자 크기를 13픽셀로 설정 */
+  line-height: 1.5; /* 줄간격을 1.5배로 설정하여 문장이 길어져도 가독성이 확보되도록 함 */
+  color: #888; /* 설명 글자 색상을 차분하고 어두운 회색(#888)으로 설정 */
+  margin-top: 8px; /* 위쪽 안내 정보들과 확연히 구분되도록 위쪽에 8픽셀 여백 추가 */
 }
 
-/* FOOTER */
+/* ==========================================================================
+   06. 하단 카피라이트 영역 (FOOTER)
+   ========================================================================== */
 footer {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #1a1a1a;
-  color: #666;
-  font-size: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  height: 80px; /* 푸터의 세로 높이를 80픽셀로 설정 */
+  display: flex; /* 푸터 내부 텍스트를 정렬하기 위해 플렉스 박스 사용 */
+  align-items: center; /* 텍스트를 세로 기준 정중앙 정렬 */
+  justify-content: center; /* 텍스트를 가로 기준 정중앙 정렬 (결과적으로 정가운데 정렬) */
+  background: #1a1a1a; /* 푸터 배경을 body보다 아주 미세하게 밝은 회색(#1a1a1a)으로 설정 */
+  color: #666; /* 카피라이트 텍스트를 어두운 회색으로 설정해 시선을 끌지 않도록 함 */
+  font-size: 14px; /* 푸터 글자 크기를 14픽셀로 설정 */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* 푸터 위쪽에 본문 영역과 구분 짓는 은은한 실선 테두리 추가 */
 }

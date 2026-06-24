@@ -36,6 +36,7 @@
     </main>
 
     <script>
+      // --- 1. DOM 요소 가져오기 ---
       const upload = document.getElementById("upload");
       const uploadBtn = document.getElementById("uploadBtn");
       const imageText = document.getElementById("imageText");
@@ -43,104 +44,113 @@
       const fileName = document.getElementById("fileName");
       const emptyMessage = document.getElementById("emptyMessage");
 
-      // 파일명 표시
+      // --- 2. 이벤트 리스너: 파일 선택 시 파일명 표시 ---
       upload.addEventListener("change", () => {
+        // 사용자가 파일을 선택했다면 그 파일의 이름을, 취소했다면 기본 안내 문구를 보여줍니다.
         fileName.textContent =
           upload.files.length > 0 ? upload.files[0].name : "선택된 파일 없음";
       });
 
-      //
-
-      // 빈 갤러리 확인
+      // --- 3. 공통 함수: 갤러리가 비어있는지 확인 ---
+      // 등록된 카드가 하나도 없다면 안내 문구를 켜고, 있다면 숨깁니다.
       function checkEmpty() {
         emptyMessage.style.display =
           gallery.children.length === 0 ? "block" : "none";
       }
 
-      // 저장된 이미지 불러오기
+      // --- 4. 이벤트 리스너: 초기 로드 시 저장된 이미지 불러오기 ---
       window.addEventListener("load", () => {
+        // 로컬 스토리지에 저장된 이미지 목록을 가져옵니다. (없으면 빈 배열)
         const savedImages =
           JSON.parse(localStorage.getItem("galleryImages")) || [];
 
+        // 저장되어 있던 데이터들을 하나씩 꺼내어 화면에 카드로 만듭니다.
         savedImages.forEach((item) => {
           createCard(item.src, item.text);
         });
 
+        // 초기 화면에 빈 안내 문구를 띄울지 결정합니다.
         checkEmpty();
       });
 
-      // 업로드
+      // --- 5. 이벤트 리스너: 업로드 버튼 클릭 (이미지 처리 및 저장) ---
       uploadBtn.addEventListener("click", () => {
         const file = upload.files[0];
         const text = imageText.value.trim();
 
-        // 파일 체크
+        // [예외 처리] 이미지를 선택하지 않았을 때
         if (!file) {
           alert("이미지를 선택해주세요.");
           return;
         }
 
-        // 설명 체크
+        // [예외 처리] 사진 설명이 비어있을 때
         if (!text) {
           alert("사진 설명을 입력해주세요.");
           return;
         }
 
+        // 이미지를 로컬에 저장할 수 있도록 Base64(Data URL) 문자열로 읽어오는 객체 생성
         const reader = new FileReader();
 
+        // 파일 읽기가 완료되었을 때 실행될 콜백 함수
         reader.onload = (e) => {
           const item = {
-            src: e.target.result,
+            src: e.target.result, // e.target.result에 이미지의 Base64 데이터가 담깁니다.
             text: text,
           };
 
-          // 화면에 추가
+          // 읽어온 데이터를 바탕으로 화면에 새 카드 추가
           createCard(item.src, item.text);
 
-          // localStorage 저장
+          // 최신 데이터를 로컬 스토리지에 기존 배열 뒤에 추가하여 저장
           const savedImages =
             JSON.parse(localStorage.getItem("galleryImages")) || [];
-
           savedImages.push(item);
-
           localStorage.setItem("galleryImages", JSON.stringify(savedImages));
 
-          // 입력 초기화
+          // 다음 업로드를 위해 입력 폼 초기화
           upload.value = "";
           imageText.value = "";
           fileName.textContent = "선택된 파일 없음";
 
+          // 비어있음 안내 텍스트 상태 갱신
           checkEmpty();
         };
 
+        // 파일을 Data URL 형식으로 읽기 시작합니다.
         reader.readAsDataURL(file);
       });
 
-      // 카드 생성
+      // --- 6. 공통 함수: 갤러리 카드 생성 및 렌더링 ---
       function createCard(src, text) {
         const card = document.createElement("div");
         card.className = "gallery-card";
 
+        // 카드 내부에 들어갈 이미지와 삭제 버튼, 텍스트 구조 정의
         card.innerHTML = `
-    <img src="${src}" alt="업로드 이미지">
-    <button class="delete-btn">✕</button>
-    <p>${text}</p>
-  `;
+          <img src="${src}" alt="업로드 이미지">
+          <button class="delete-btn">✕</button>
+          <p>${text}</p>
+        `;
 
-        // 삭제 기능
+        // [기능] 카드 개별 삭제 버튼 클릭 이벤트
         card.querySelector(".delete-btn").addEventListener("click", () => {
-          card.remove();
+          card.remove(); // 1. 화면에서 카드 엘리먼트 즉시 제거
 
+          // 2. 로컬 스토리지에서 동일한 주소(src)를 가진 데이터 제외하고 필터링
           let savedImages =
             JSON.parse(localStorage.getItem("galleryImages")) || [];
-
           savedImages = savedImages.filter((item) => item.src !== src);
 
+          // 3. 필터링된 새 배열을 로컬 스토리지에 덮어씁니다.
           localStorage.setItem("galleryImages", JSON.stringify(savedImages));
 
+          // 4. 삭제 후 갤러리가 완전히 비었는지 다시 체크
           checkEmpty();
         });
 
+        // 최신 사진이 맨 앞으로 오도록 갤러리 영역의 처음에 추가(prepend)합니다.
         gallery.prepend(card);
       }
     </script>

@@ -269,12 +269,20 @@
     <footer>© 2026 MyLizard. All rights reserved.</footer>
 
     <script>
+      // 지정한 ID를 가진 페이지를 보여주고, 화면을 맨 위로 이동시키는 함수
       function showPage(pageId) {
+        // 1. 클래스명이 "page"인 모든 엘리먼트(콘텐츠 영역)를 가져옵니다.
         const pages = document.querySelectorAll(".page");
+
+        // 2. 현재 활성화되어 있는(보이고 있는) 페이지들을 전부 숨깁니다.
         pages.forEach((page) => {
-          page.classList.remove("active");
+          page.classList.remove("active"); // 'active' 클래스를 제거하여 숨김 처리
         });
+
+        // 3. 사용자가 요청한 특정 ID를 가진 페이지에 'active' 클래스를 붙여 화면에 보여줍니다.
         document.getElementById(pageId).classList.add("active");
+
+        // 4. 새로운 페이지가 열렸으므로, 스크롤을 화면 최상단으로 부드럽게 이동시킵니다.
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     </script>
