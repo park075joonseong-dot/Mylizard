@@ -2,76 +2,59 @@
    01. 글로벌 기본 초기화 및 배경 설정 (RESET & BODY)
    ========================================================================== */
 * {
-  margin: 0; /* 모든 HTML 요소의 기본 바깥 여백을 0으로 밀어버림 */
-  padding: 0; /* 모든 HTML 요소의 기본 안쪽 여백을 0으로 밀어버림 */
+  margin: 0;
+  padding: 0;
   box-sizing: border-box; /* 패딩과 테두리 두께가 늘어나도 처음에 지정한 가로 너비를 그대로 유지 */
 }
 
 body {
-  background-color: #121212; /* 사이트의 전체적인 분위기를 잡아주는 깊고 어두운 다크 모드 배경색 */
-  font-family: sans-serif; /* 글꼴을 삐침이 없는 깔끔한 고딕 스타일로 지정 */
-  color: white; /* 어두운 배경과 대조되는 기본 흰색 글자색 설정 */
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
 }
 
 /* ==========================================================================
    02. 고정형 상단 네비게이션 헤더 (HEADER)
    ========================================================================== */
 .gallery-header {
-  width: 100%; /* 헤더 가로 길이를 화면 너비에 100% 가득 채움 */
-  height: 80px; /* 헤더 세로 높이를 80픽셀로 고정 */
+  width: 100%;
+  height: 80px;
   position: fixed; /* 스크롤을 아무리 내려도 상단 특정 위치에 항상 못 박아둠 */
-  top: 0; /* 화면 가장 맨 위 끝에 딱 붙임 */
-  left: 0; /* 화면 가장 맨 왼쪽 끝에 딱 붙임 */
+  top: 0;
+  left: 0;
   z-index: 1000; /* 본문 내용이나 카드가 스크롤 될 때 헤더 위로 겹쳐 올라오는 현상 방지 (우선순위 최상위) */
-  background: rgba(
-    18,
-    18,
-    18,
-    0.8
-  ); /* 80% 투명도를 가진 다크 블랙 배경색 지정 */
+  background: rgba(18, 18, 18, 0.8);
   backdrop-filter: blur(
     10px
   ); /* 헤더 뒤로 스쳐 지나가는 본문 콘텐츠를 10픽셀만큼 흐리게 블러 처리 */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 헤더 아래 경계선에 은은한 5% 투명도 흰색 실선 추가 */
-  padding: 0 50px; /* 헤더 내부 좌우에 50픽셀 여백 확보 */
+  padding: 0 50px;
   display: flex; /* 내부의 로고와 홈 버튼을 일렬 배치하기 위해 플렉스 박스 활성화 */
   justify-content: space-between; /* 로고는 왼쪽 끝, 홈 버튼은 오른쪽 끝으로 양 끝 정렬 */
   align-items: center; /* 플렉스 박스 내부 아이템들을 세로 정중앙 정렬 */
 }
 
 .logo {
-  font-size: 32px; /* 로고의 폰트 크기를 32픽셀로 설정 */
-  font-weight: bold; /* 로고 텍스트를 두껍게 설정 */
-  color: #ffffff; /* 로고 색상을 완전한 흰색으로 설정 */
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 /* [컴포넌트] 홈으로 바로가기 버튼 */
 .home-btn {
   text-decoration: none; /* 링크(<a>)에 기본적으로 들어가는 밑줄 장식 강제 삭제 */
   color: #9eff7a; /* 글자 색상을 브랜드 테마 컬러인 네온 그린으로 지정 */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 네온 그린 컬러에 투명도를 15% 섞어 은은한 배경색 만듦 */
-  padding: 10px 20px; /* 버튼 내부 여백 (위아래 10픽셀, 좌우 20픽셀) */
-  border-radius: 12px; /* 버튼 모서리를 12픽셀만큼 둥글게 가공 */
-  font-size: 16px; /* 버튼 글자 크기를 16픽셀로 설정 */
-  font-weight: bold; /* 버튼 글씨를 두껍게 강조 */
-  transition: 0.3s; /* 호버 시 발동하는 시각 효과를 0.3초간 부드럽게 재생 */
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .home-btn:hover {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 마우스를 올리면 배경 투명도를 30%로 올려 더 진하게 바꿈 */
-  transform: translateY(
-    -2px
-  ); /* 마우스를 올리면 Y축(위쪽)으로 2픽셀만큼 가볍게 띄움 */
+  background: rgba(158, 255, 122, 0.3);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================================
