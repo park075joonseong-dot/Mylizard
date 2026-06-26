@@ -9,10 +9,12 @@
   <body>
     <header id="header">
       <nav class="navbar">
+        <!-- onclick: 클릭했을 때 실행할 JS 함수를 직접 지정 -->
         <div class="logo" onclick="showPage('home')">My Lizard</div>
 
         <div class="menu">
           <button onclick="showPage('home')">Home</button>
+          <!-- location.href: 클릭 시 해당 주소로 페이지 이동 -->
           <button onclick="location.href = '/page/gallery.html'">
             Gallery
           </button>
@@ -41,21 +43,18 @@
                 <p>날렵한 몸과 긴 꼬리로 민첩하게 움직이는 대표적인 파충류.</p>
               </div>
             </div>
-
             <div class="main-card" onclick="showPage('Gecko')">
               <div class="card-content">
                 <h2>Gecko</h2>
                 <p>벽과 천장을 자유롭게 오르내리는 귀여운 도마뱀.</p>
               </div>
             </div>
-
             <div class="main-card" onclick="showPage('Snake')">
               <div class="card-content">
                 <h2>Snake</h2>
                 <p>유연한 몸놀림과 신비로운 분위기가 돋보이는 파충류.</p>
               </div>
             </div>
-
             <div class="main-card" onclick="showPage('Turtle')">
               <div class="card-content">
                 <h2>Turtle</h2>
@@ -269,20 +268,24 @@
     <footer>© 2026 MyLizard. All rights reserved.</footer>
 
     <script>
-      // 지정한 ID를 가진 페이지를 보여주고, 화면을 맨 위로 이동시키는 함수
       function showPage(pageId) {
-        // 1. 클래스명이 "page"인 모든 엘리먼트(콘텐츠 영역)를 가져옵니다.
+        // querySelectorAll: class명이 "page"인 HTML 요소를 전부 배열처럼 가져옴
         const pages = document.querySelectorAll(".page");
 
-        // 2. 현재 활성화되어 있는(보이고 있는) 페이지들을 전부 숨깁니다.
+        // forEach: 배열의 요소를 하나씩 꺼내서 반복 실행
+        // classList.remove: 해당 요소에서 특정 클래스명을 제거
+        // → 모든 페이지에서 'active'를 제거해 전부 숨김
         pages.forEach((page) => {
-          page.classList.remove("active"); // 'active' 클래스를 제거하여 숨김 처리
+          page.classList.remove("active");
         });
 
-        // 3. 사용자가 요청한 특정 ID를 가진 페이지에 'active' 클래스를 붙여 화면에 보여줍니다.
+        // getElementById: id명으로 HTML 요소 하나를 가져옴
+        // classList.add: 해당 요소에 클래스명을 추가
+        // → 클릭한 페이지에만 'active'를 붙여서 화면에 표시
         document.getElementById(pageId).classList.add("active");
 
-        // 4. 새로운 페이지가 열렸으므로, 스크롤을 화면 최상단으로 부드럽게 이동시킵니다.
+        // window.scrollTo: 스크롤 위치를 이동시킴
+        // top: 0 → 맨 위로, behavior: "smooth" → 부드럽게 이동
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     </script>

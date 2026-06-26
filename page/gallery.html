@@ -75,8 +75,8 @@
 
       // --- 5. 이벤트 리스너: 업로드 버튼 클릭 (이미지 처리 및 저장) ---
       uploadBtn.addEventListener("click", () => {
-        const file = upload.files[0];
-        const text = imageText.value.trim();
+        const file = upload.files[0]; // 선택한 파일 데이터
+        const text = imageText.value.trim(); // 앞뒤 공백을 없앤 설명 글
 
         // [예외 처리] 이미지를 선택하지 않았을 때
         if (!file) {

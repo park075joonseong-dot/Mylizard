@@ -4,7 +4,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* 패딩과 테두리 두께가 늘어나도 처음에 지정한 가로 너비를 그대로 유지 */
+  box-sizing: border-box;
 }
 
 body {
@@ -19,19 +19,17 @@ body {
 .gallery-header {
   width: 100%;
   height: 80px;
-  position: fixed; /* 스크롤을 아무리 내려도 상단 특정 위치에 항상 못 박아둠 */
+  position: fixed; /* 스크롤해도 항상 화면 상단에 고정 */
   top: 0;
   left: 0;
-  z-index: 1000; /* 본문 내용이나 카드가 스크롤 될 때 헤더 위로 겹쳐 올라오는 현상 방지 (우선순위 최상위) */
+  z-index: 1000; /* 숫자가 클수록 다른 요소 위에 표시됨. 헤더가 본문에 안 가려지게 */
   background: rgba(18, 18, 18, 0.8);
-  backdrop-filter: blur(
-    10px
-  ); /* 헤더 뒤로 스쳐 지나가는 본문 콘텐츠를 10픽셀만큼 흐리게 블러 처리 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 헤더 아래 경계선에 은은한 5% 투명도 흰색 실선 추가 */
+  backdrop-filter: blur(10px); /* 헤더 뒤 배경을 흐리게 만드는 유리 효과 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0 50px;
-  display: flex; /* 내부의 로고와 홈 버튼을 일렬 배치하기 위해 플렉스 박스 활성화 */
-  justify-content: space-between; /* 로고는 왼쪽 끝, 홈 버튼은 오른쪽 끝으로 양 끝 정렬 */
-  align-items: center; /* 플렉스 박스 내부 아이템들을 세로 정중앙 정렬 */
+  display: flex; /* 내부 요소를 가로로 나란히 배치하는 레이아웃 */
+  justify-content: space-between; /* flex 자식 요소들을 양 끝으로 밀어서 배치 */
+  align-items: center; /* flex 자식 요소들을 세로 기준 가운데 정렬 */
 }
 
 .logo {
@@ -40,10 +38,9 @@ body {
   color: #ffffff;
 }
 
-/* [컴포넌트] 홈으로 바로가기 버튼 */
 .home-btn {
-  text-decoration: none; /* 링크(<a>)에 기본적으로 들어가는 밑줄 장식 강제 삭제 */
-  color: #9eff7a; /* 글자 색상을 브랜드 테마 컬러인 네온 그린으로 지정 */
+  text-decoration: none;
+  color: #9eff7a;
   background: rgba(158, 255, 122, 0.15);
   padding: 10px 20px;
   border-radius: 12px;
@@ -54,287 +51,202 @@ body {
 
 .home-btn:hover {
   background: rgba(158, 255, 122, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Y축 위로 2px 살짝 띄우는 효과 */
 }
 
 /* ==========================================================================
    03. 메인 레이아웃 및 글 작성 영역 (MAIN & WRITE SECTION)
    ========================================================================== */
 main {
-  padding-top: 130px; /* fixed로 상단에 고정된 헤더 높이 때문에 본문이 파묻히지 않도록 상단 여백 130픽셀 추가 */
+  padding-top: 130px;
 }
 
-/* 게시판 전체 레이아웃 가로폭 제한 박스 */
 .post-section {
-  max-width: 900px; /* 줄글이 너무 길어지면 눈이 피로하므로 가독성을 위해 게시판 전체 너비를 최대 900픽셀로 제한 */
-  margin: 0 auto 30px auto; /* 위 0, 좌우 auto(중앙 정렬), 아래쪽 30픽셀 바깥 여백 설정 */
-  padding: 0 20px; /* 모바일 등 좁은 화면에서 박스가 화면 테두리에 닿지 않도록 좌우 20픽셀 안쪽 여백 추가 */
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  padding: 0 20px;
 }
 
-/* 글 작성 폼을 감싸는 박스 틀 */
 .post-write-wrap {
-  display: flex; /* 내부 입력 요소들을 배치하기 위해 플렉스 박스 적용 */
-  flex-direction: column; /* 배치 방향을 세로로 틀어 제목, 본문 textarea, 버튼이 아래로 차례대로 쌓이게 설정 */
-  gap: 15px; /* 세로로 쌓인 입력창 요소들 사이에 15픽셀의 규칙적인 수직 간격 부여 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.03
-  ); /* 투명도가 3% 들어간 흰색을 깔아 아주 미세한 유리 질감 연출 */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* 박스 외곽에 투명한 흰색 실선 테두리 생성 */
-  padding: 25px; /* 글쓰기 박스 내부 사방에 25픽셀 여백 확보 */
-  border-radius: 20px; /* 글쓰기 박스 모서리를 20픽셀 라운딩 처리 */
+  display: flex;
+  flex-direction: column; /* flex 자식 요소들을 가로가 아닌 세로(위→아래) 방향으로 쌓음 */
+  gap: 15px; /* flex/grid에서 자식 요소들 사이의 간격 */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 20px;
 }
 
-/* [컴포넌트] 글 제목 입력창 & 글 본문 입력창 공통 스타일 */
 #postTitle,
 #postContent {
-  width: 100%; /* 부모 박스 너비에 맞춰 가로폭을 100% 꽉 채움 */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* 입력창 테두리에 은은한 흰색 선 추가 */
-  background: rgba(
-    0,
-    0,
-    0,
-    0.3
-  ); /* 인풋 창 내부를 검은색 투명도 30%로 주어 배경보다 한 단계 어둡게 설정 */
-  border-radius: 12px; /* 입력창 사각 모서리를 12픽셀 둥글게 깎음 */
-  padding: 15px; /* 글자 적히는 곳 안쪽에 15픽셀 여백을 주어 답답함 해소 */
-  font-size: 16px; /* 글자 크기를 16픽셀로 설정 */
-  color: white; /* 유저가 입력하는 타이핑 텍스트 색상을 흰색으로 설정 */
-  outline: none; /* 입력창을 클릭했을 때 브라우저가 강제로 씌우는 시안성 나쁜 파란 테두리 지우기 */
-  transition: 0.3s; /* 포커스 해제/진입 시 테두리 색상 변화를 0.3초간 부드럽게 연결 */
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 16px;
+  color: white;
+  outline: none; /* 입력창 클릭 시 브라우저가 자동으로 씌우는 파란 테두리 제거 */
+  transition: 0.3s;
 }
 
-/* 입력창을 마우스로 클릭(focus)했을 때 활성화되는 포인트 스타일 */
+/* 입력창을 클릭(focus)했을 때 활성화되는 스타일 */
 #postTitle:focus,
 #postContent:focus {
-  border-color: rgba(
-    158,
-    255,
-    122,
-    0.5
-  ); /* 마우스 클릭 중일 땐 테두리 선을 네온 그린(50%) 색상으로 바꿈 */
-  background: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* 마우스 클릭 중일 땐 인풋 배경을 조금 더 어두운 50% 검은색으로 변경 */
+  border-color: rgba(158, 255, 122, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* 글 본문 입력창(Textarea) 전용 스타일 */
 #postContent {
-  min-height: 140px; /* 아무리 글을 적게 써도 본문 입력상자가 140픽셀의 최소 세로 높이를 유지하게 함 */
-  resize: vertical; /* 우측 하단 드래그 핸들러로 가로폭은 고정하고 오직 상하(세로) 높이만 늘릴 수 있게 제한 */
+  min-height: 140px;
+  resize: vertical; /* 세로 높이만 드래그로 조절 가능하게 제한 */
 }
 
-/* [컴포넌트] 게시글 등록 버튼 */
 #postBtn {
-  background: #9eff7a; /* 버튼 배경을 투명도 없는 꽉 찬 순수 네온 그린으로 칠함 */
-  color: #121212; /* 밝은 버튼 배경과 대비를 주어 글씨가 잘 보이도록 글자색을 어두운 블랙으로 지정 */
-  border: none; /* 기본 버튼에 들어있는 딱딱한 테두리선 제거 */
-  border-radius: 12px; /* 버튼 모서리를 12픽셀 둥글게 깎음 */
-  padding: 15px; /* 버튼 안쪽에 15픽셀의 위아래/좌우 두툼한 여백 부여 */
-  font-size: 16px; /* 글자 크기를 16픽셀로 설정 */
-  font-weight: bold; /* 버튼 텍스트를 두껍게 설정 */
-  cursor: pointer; /* 마우스가 버튼 위에 올라오면 손가락 클릭 모양 아이콘으로 변경 */
-  transition: 0.3s; /* 호버 시 발동하는 애니메이션 효과를 0.3초 동안 재생 */
+  background: #9eff7a;
+  color: #121212;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer; /* 마우스가 올라오면 손가락 모양 커서로 변경 */
+  transition: 0.3s;
 }
 
 #postBtn:hover {
-  background: #b6ff9c; /* 마우스를 올리면 기존 그린보다 훨씬 더 밝고 화사한 연두색(#b6ff9c)으로 변경 */
-  transform: translateY(-2px); /* 버튼을 위쪽 방향으로 2픽셀 살짝 띄움 */
-  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.3); /* 버튼 하단에 은은한 네온 그린빛 그림자를 발생시켜 야광 효과 구현 */
+  background: #b6ff9c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.3);
 }
 
 /* ==========================================================================
    04. 등록된 게시글 리스트 및 카드 UI (POST LIST & CARD)
    ========================================================================== */
 #postList {
-  max-width: 900px; /* 등록된 글 목록 영역도 최대 900픽셀로 동일하게 제한 */
-  margin: auto; /* 좌우 마진 auto로 화면 한가운데에 리스트 배치 */
-  padding: 0 20px 80px 20px; /* 여백 설정 (상0, 우20, 하단에 80픽셀 넉넉하게 띄우고, 좌20) */
+  max-width: 900px;
+  margin: auto;
+  padding: 0 20px 80px 20px;
 }
 
-/* [컴포넌트] 개별 게시글 카드 */
 .post-card {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.04
-  ); /* 카드 기본 배경색을 은은한 4% 투명도 흰색으로 채움 */
-  border: 1px solid rgba(255, 255, 255, 0.03); /* 카드 테두리에 눈에 띌 듯 말 듯 한 흐린 경계선 추가 */
-  border-radius: 20px; /* 게시글 카드 사방 모서리를 20픽셀 둥글게 처리 */
-  padding: 25px; /* 게시글 내부 텍스트들이 답답하지 않게 25픽셀의 사방 안쪽 여백 설정 */
-  margin-bottom: 25px; /* 카드와 카드들이 수직으로 붙지 않게 아래쪽에 25픽셀 간격 배치 */
-  transition: 0.3s; /* 마우스 호버 변화를 0.3초 동안 부드럽게 표현 */
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  transition: 0.3s;
 }
 
-/* 게시글 카드 마우스 호버 효과 */
 .post-card:hover {
-  border-color: rgba(
-    255,
-    255,
-    255,
-    0.08
-  ); /* 마우스를 올리면 테두리 선이 원래보다 조금 더 하얗고 명확해짐 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.05
-  ); /* 마우스를 올리면 배경 투명도를 5%로 미세하게 올려 살짝 밝게 만듦 */
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* 카드 상단 영역 (제목과 삭제 버튼 좌우 배치) */
 .post-header {
-  display: flex; /* 제목과 삭제 버튼을 한 줄에 정렬하기 위해 플렉스 박스 적용 */
-  justify-content: space-between; /* 제목은 왼쪽 정렬, 삭제 버튼은 완전히 오른쪽 끝으로 밀어 양 끝 정렬 */
-  align-items: center; /* 두 요소의 높낮이가 맞게 세로축 기준 정중앙 정렬 */
-  margin-bottom: 15px; /* 상단 정보 영역과 아래쪽 본문 글자 사이에 15픽셀 여백 추가 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-/* 게시글 제목 텍스트 */
 .post-card h3 {
-  font-size: 22px; /* 게시글 제목의 크기를 22픽셀로 설정 */
-  color: #9eff7a; /* 제목 텍스트를 포인트 컬러인 네온 그린으로 칠해 눈에 띄게 만듦 */
+  font-size: 22px;
+  color: #9eff7a;
 }
 
-/* 게시글 본문 텍스트 구역 */
 .post-body-content {
-  font-size: 16px; /* 본문 글자 크기를 16픽셀로 설정 */
-  line-height: 1.6; /* 본문 줄간격을 1.6배로 설정하여 가독성 대폭 상승 */
-  color: #ddd; /* 텍스트 색상을 살짝 부드러운 밝은 회색으로 설정 */
-  margin-bottom: 25px; /* 본문 글과 아래쪽 댓글 영역 사이에 25픽셀 여백 확보 */
-  white-space: pre-wrap; /* [핵심] 유저가 글 쓸 때 입력했던 엔터(줄바꿈)나 스페이스바(공백)를 브라우저가 무시하지 않고 그대로 출력하게 고정 */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ddd;
+  margin-bottom: 25px;
+  white-space: pre-wrap; /* 사용자가 입력한 줄바꿈(엔터)과 공백을 그대로 화면에 출력 */
 }
 
-/* [컴포넌트] 게시글 삭제 버튼 */
 .delete-post-btn {
-  border: none; /* 기본 버튼 테두리 선 제거 */
-  background: rgba(
-    255,
-    107,
-    107,
-    0.15
-  ); /* 삭제 경고의 의미를 담아 파스텔톤 레드 컬러에 15% 투명도를 준 배경색 깔기 */
-  color: #ff6b6b; /* 글자 색상도 경고 느낌의 파스텔 레드 계열로 설정 */
-  padding: 8px 16px; /* 버튼 내부 여백 (위아래 8픽셀, 좌우 16픽셀) */
-  border-radius: 8px; /* 삭제 버튼 모서리를 8픽셀만큼 라운딩 */
-  font-size: 14px; /* 글자 크기를 14픽셀로 약간 작게 세팅 */
-  cursor: pointer; /* 마우스 올리면 손가락 클릭 커서로 변경 */
-  transition: 0.3s; /* 마우스 오버 시 색상 반전 애니메이션을 0.3초간 작동 */
+  border: none;
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .delete-post-btn:hover {
-  background: #ff6b6b; /* 마우스를 올리면 투명함이 없는 완전 꽉 찬 솔리드 레드 배경으로 채움 */
-  color: white; /* 배경이 붉어지므로 글씨는 선명하게 흰색으로 반전 */
+  background: #ff6b6b;
+  color: white;
 }
 
 /* ==========================================================================
    05. 댓글 영역 및 댓글 입력 UI (COMMENTS AREA & INPUT)
    ========================================================================== */
-/* 댓글 전체를 감싸는 영역 구분을 위한 상단 테두리 선 */
 .comments {
-  border-top: 1px solid rgba(255, 255, 255, 0.05); /* 본문 글과 확실히 분리되도록 영역 맨 위에 은은한 가로 경계선 추가 */
-  padding-top: 5px; /* 선 바로 밑에 댓글 내용이 붙지 않게 5픽셀 윗여백 추가 */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 5px;
 }
 
-/* [컴포넌트] 개별 등록된 댓글 내용 박스 */
 .comment {
-  display: flex; /* 댓글 본문 텍스트와 우측 ✕(삭제) 버튼을 가로 정렬하기 위해 플렉스 박스 사용 */
-  justify-content: space-between; /* 댓글 내용은 왼쪽 끝, 작은 ✕ 버튼은 오른쪽 맨 끝에 배치하도록 양 끝 정렬 */
-  align-items: center; /* 댓글 내용과 버튼의 세로 중심선 정렬 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.02
-  ); /* 댓글 배경을 카드보다 더 투명한 2% 흰색으로 깔아 입체감 분리 */
-  border: 1px solid rgba(255, 255, 255, 0.03); /* 댓글 박스 외곽에 아주 희미한 테두리 실선 추가 */
-  padding: 12px 18px; /* 댓글 상자 내부 여백 (위아래 12픽셀, 좌우 18픽셀) */
-  border-radius: 10px; /* 댓글 상자 모서리를 10픽셀 둥글게 처리 */
-  margin-top: 10px; /* 댓글들이 세로로 다닥다닥 붙지 않게 윗바깥 여백을 10픽셀씩 부여 */
-  color: #ccc; /* 댓글 글자 색상을 본문보다 한 단계 차분한 회색(#ccc)으로 세팅 */
-  font-size: 15px; /* 댓글 글자 크기 15픽셀 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: #ccc;
+  font-size: 15px;
 }
 
-/* 개별 댓글 삭제 버튼 (✕) */
 .delete-comment-btn {
-  border: none; /* 테두리 제거 */
-  background: transparent; /* 평소에는 버튼 배경색을 투명(transparent)하게 만들어 숨김 효과 */
-  color: #ff6b6b; /* ✕ 아이콘의 컬러를 파스텔 레드색으로 지정 */
-  font-size: 14px; /* 아이콘 크기 14픽셀 */
-  font-weight: bold; /* ✕ 표시를 두껍게 만들어 가시성 확보 */
-  cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
-  transition: 0.2s; /* 호버 시 확대 모션 속도를 0.2초로 빠르게 설정 */
+  border: none;
+  background: transparent;
+  color: #ff6b6b;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-/* 댓글 삭제 버튼 호버 시 살짝 확대되어 피드백 제공 */
 .delete-comment-btn:hover {
-  transform: scale(
-    1.2
-  ); /* 마우스를 올리면 ✕ 아이콘 크기가 원래의 1.2배로 툭 커지면서 직관적인 클릭 반응 제공 */
+  transform: scale(1.2); /* 원래 크기의 1.2배로 확대 */
 }
 
-/* 댓글을 새로 작성하는 인풋과 버튼 정렬 틀 */
 .comment-input-wrap {
-  display: flex; /* 댓글 입력창(Input)과 등록 단추를 가로로 나란히 배치하기 위해 플렉스 박스 적용 */
-  gap: 10px; /* 입력창과 버튼 사이의 가로 정렬 간격을 10픽셀 띄움 */
-  margin-top: 20px; /* 위의 댓글 목록들과 뒤섞이지 않게 입력 구역 위쪽에 20픽셀 바깥 여백 확보 */
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-/* 댓글 입력 창 */
 .comment-input {
-  flex: 1; /* [핵심] 가로 정렬 상태에서 우측 버튼이 차지하는 공간을 제외한 왼쪽 남은 여백을 이 인풋창이 전부 밀고 들어가 채우도록 설정 */
-  padding: 12px 15px; /* 입력상자 내부 안쪽 여백 (위아래 12픽셀, 좌우 15픽셀) */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* 입력 테두리에 흐린 가이드라인 선 그리기 */
-  background: rgba(
-    0,
-    0,
-    0,
-    0.2
-  ); /* 인풋 안쪽을 20% 투명도의 블랙으로 한 톤 다운 */
-  border-radius: 10px; /* 모서리 반경 10픽셀 라운딩 */
-  color: white; /* 댓글 입력 글자색 흰색 */
-  outline: none; /* 클릭 시 브라우저가 임의로 생성하는 테두리 아웃라인 해제 */
-  font-size: 15px; /* 타이핑 글자 크기 15픽셀 */
+  flex: 1; /* 버튼이 차지하고 남은 공간을 이 입력창이 전부 채움 */
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  font-size: 15px;
 }
 
 .comment-input:focus {
-  border-color: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 댓글 창을 클릭(활성화)하면 테두리가 은은한 네온 그린빛(30%)으로 변경 */
+  border-color: rgba(158, 255, 122, 0.3);
 }
 
-/* [컴포넌트] 댓글 등록 실행 버튼 */
 .comment-btn {
-  border: none; /* 기본 단추 테두리 지우기 */
-  border-radius: 10px; /* 모서리를 10픽셀만큼 라운딩 */
-  padding: 0 20px; /* 좌우 공간에만 20픽셀 여백을 넉넉히 주어 가로로 안정감 있는 직사각형 형태 유지 (상하는 알아서 정렬) */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 네온 그린색에 투명도 15%를 얹은 차분한 반투명 연두색 배경 */
-  color: #9eff7a; /* 단추 속 '등록' 글씨 색상을 포인트 네온 그린으로 명확히 표현 */
-  font-weight: bold; /* 글자를 두껍게 처리 */
-  font-size: 15px; /* 글자 크기 15픽셀 */
-  cursor: pointer; /* 마우스 올리면 손가락 모양 아이콘 활성화 */
-  transition: 0.3s; /* 마우스 오버 효과 전환을 0.3초 처리 */
+  border: none;
+  border-radius: 10px;
+  padding: 0 20px;
+  background: rgba(158, 255, 122, 0.15);
+  color: #9eff7a;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .comment-btn:hover {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 마우스를 올리면 버튼 배경 투명도를 30%로 올려서 클릭 피드백 선사 */
+  background: rgba(158, 255, 122, 0.3);
 }

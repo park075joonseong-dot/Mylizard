@@ -2,351 +2,269 @@
    01. 글로벌 초기화 및 공통 기본 스타일 (RESET & GLOBAL)
    ========================================================================== */
 * {
-  margin: 0; /* 모든 HTML 요소의 기본 바깥 여백을 0으로 초기화 */
-  padding: 0; /* 모든 HTML 요소의 기본 안쪽 여백을 0으로 초기화 */
-  box-sizing: border-box; /* 패딩과 테두리 두께를 너비(width)에 포함시켜 레이아웃 크기 왜곡 방지 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #121212; /* 전체 사이트 콘셉트와 일치하는 다크 모드 배경색 설정 */
-  font-family: sans-serif; /* 고딕 계열의 깔끔한 기본 글꼴 지정 */
-  color: white; /* 웹사이트의 기본 텍스트 색상을 흰색으로 설정 */
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
 }
 
-/* 텍스트 내 강조 태그(b) 스타일 */
 b {
-  color: #9eff7a; /* 본문 중 <b> 태그로 감싸진 강조 단어는 포인트 컬러인 네온 그린으로 노출 */
+  color: #9eff7a;
 }
 
 /* ==========================================================================
    02. 상단 고정 헤더 영역 (HEADER)
    ========================================================================== */
 .header {
-  width: 100%; /* 헤더의 가로 너비를 화면 전체(100%)로 채움 */
-  position: fixed; /* 스크롤을 내려도 항상 화면 최상단 고정 */
-  top: 0; /* 화면의 가장 맨 위(0)에 밀착 */
-  left: 0; /* 화면의 가장 왼쪽(0)에 밀착 */
-  z-index: 1000; /* 본문 요소들이 헤더 위로 겹쳐 올라오지 않도록 레이어 최상단 순위 지정 */
-  background: rgba(
-    18,
-    18,
-    18,
-    0.8
-  ); /* 뒷배경이 은은하게 비치는 80% 투명도의 어두운 배경 */
-
-  /* 크로스 브라우징(Safari 등)을 고려한 투명 블러 효과 처리 */
-  backdrop-filter: blur(
-    10px
-  ); /* 일반 브라우저에서 헤더 뒤 배경을 10픽셀만큼 흐리게 만듦 */
-  -webkit-backdrop-filter: blur(
-    10px
-  ); /* 아이폰, 맥북(Safari) 브라우저에서도 흐림 효과가 작동하도록 지원 */
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 헤더 아래쪽에 은은한 흰색 테두리 선 추가 */
-  display: flex; /* 내부 요소들을 정렬하기 위해 플렉스 박스 레이아웃 활성화 */
-  justify-content: space-between; /* 양 끝 정렬 (제목은 왼쪽 끝, 홈 버튼은 오른쪽 끝 배치) */
-  align-items: center; /* 헤더 안의 요소들을 세로축 기준 가운데 정렬 */
-  padding: 20px 50px; /* 헤더 안쪽 여백 (위아래 20픽셀, 좌우 50픽셀) */
+  width: 100%;
+  position: fixed; /* 스크롤해도 항상 화면 상단에 고정 */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 숫자가 클수록 다른 요소 위에 표시됨. 헤더가 본문에 안 가려지게 */
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px); /* 헤더 뒤 배경을 흐리게 만드는 유리 효과 */
+  -webkit-backdrop-filter: blur(10px); /* Safari(아이폰, 맥북)용 동일 효과 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex; /* 내부 요소를 가로로 나란히 배치하는 레이아웃 */
+  justify-content: space-between; /* flex 자식 요소들을 양 끝으로 밀어서 배치 */
+  align-items: center; /* flex 자식 요소들을 세로 기준 가운데 정렬 */
+  padding: 20px 50px;
 }
 
 .page-title {
-  text-align: center; /* 페이지 타이틀 텍스트를 가운데 정렬 */
-  color: #9eff7a; /* 텍스트 색상을 네온 그린으로 설정 */
-  margin-bottom: 40px; /* 아래 요소와의 간격을 위해 40픽셀의 바깥 여백 추가 */
+  text-align: center;
+  color: #9eff7a;
+  margin-bottom: 40px;
 }
 
 .header h1 {
-  font-size: 26px; /* 헤더 내부 타이틀 글자 크기를 26픽셀로 설정 */
-  font-weight: bold; /* 글자를 두껍게 설정 */
-  color: #ffffff; /* 글자 색상을 순수 흰색으로 설정 */
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-/* [컴포넌트] 홈으로 버튼 스타일 */
 .home-btn {
-  text-decoration: none; /* <a> 태그 특유의 밑줄을 지움 */
-  color: #9eff7a; /* 글자 색상을 네온 그린으로 설정 */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 네온 그린 색상에 15% 투명도를 준 반투명 배경색 */
-  padding: 10px 20px; /* 버튼 내부 여백 (위아래 10픽셀, 좌우 20픽셀) */
-  border-radius: 12px; /* 버튼 모서리를 12픽셀만큼 둥글게 깎음 */
-  font-weight: bold; /* 글자를 두껍게 설정 */
-  font-size: 15px; /* 글자 크기를 15픽셀로 설정 */
-  transition: 0.3s; /* 상태 변화 시 0.3초 동안 부드럽게 애니메이션이 작동하도록 설정 */
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s; /* 호버 시 변화가 0.3초 동안 부드럽게 일어남 */
 }
 
 .home-btn:hover {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 마우스를 올리면 배경 투명도를 30%로 올려 더 진하게 만듦 */
-  color: #9eff7a; /* 호버 상태에서도 글자 색상은 네온 그린 유지 */
-  transform: translateY(
-    -2px
-  ); /* 마우스를 올렸을 때 Y축(위쪽)으로 2픽셀만큼 살짝 띄움 */
+  background: rgba(158, 255, 122, 0.3);
+  color: #9eff7a;
+  transform: translateY(-2px); /* Y축 위로 2px 살짝 띄우는 효과 */
 }
 
 /* ==========================================================================
    03. 메인 레이아웃 및 컨테이너 (CONTAINER & LAYOUT)
    ========================================================================== */
 .container {
-  width: 100%; /* 컨테이너의 기본 가로폭을 100%로 설정 */
-  max-width: 1200px; /* 아무리 대형 모니터여도 전체 가로폭이 1200픽셀을 넘지 않도록 제한 */
-  margin: 0 auto; /* 좌우 마진을 auto로 주어 박스를 화면 정중앙에 정렬 */
-  /* [핵심] 고정(fixed) 헤더에 본문 콘텐츠가 가려지지 않도록 상단 패딩(140px)을 여유 있게 확보 (상140, 우20, 하60, 좌20) */
-  padding: 140px 20px 60px 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* 좌우 margin을 auto로 주면 박스가 화면 정중앙에 배치됨 */
+  padding: 140px 20px 60px 20px; /* 고정 헤더에 콘텐츠가 가려지지 않게 상단 패딩을 크게 확보 */
 }
 
 /* ==========================================================================
    04. 상단 대표 비주얼 영역 (HERO SECTION)
    ========================================================================== */
 .hero {
-  margin-bottom: 50px; /* 히어로 영역 아래쪽에 50픽셀의 여백 추가 */
-  width: 100%; /* 히어로 영역 가로폭을 100%로 설정 */
+  margin-bottom: 50px;
+  width: 100%;
 }
 
 .hero-img {
-  width: 100%; /* 이미지 가로 너비를 박스 가로폭에 100% 가득 채움 */
-  height: 600px; /* 와이드하고 웅장한 느낌을 주는 600픽셀 고정 높이 지정 */
-  object-fit: cover; /* 원본 이미지 비율을 유지하면서 600px 높이 상자에 꽉 차도록 중심 기준으로 자름 */
-  border-radius: 25px; /* 이미지 사방 모서리를 25픽셀만큼 부드럽게 라운딩 처리 */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* 이미지 외곽에 아주 흐린 흰색 테두리 추가 */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* 이미지 밑으로 묵직한 그림자를 깔아 입체감과 띄워진 느낌 표현 */
+  width: 100%;
+  height: 600px;
+  object-fit: cover; /* 이미지 비율 유지하면서 지정한 크기에 꽉 차도록 잘라서 표시 */
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================================================================
    05. 공통 정보 요약 박스 (INFO BOX & LIST)
    ========================================================================== */
 .info-box {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.04
-  ); /* 박스 배경을 4% 투명도의 아주 은은한 흰색으로 지정 */
-  backdrop-filter: blur(
-    10px
-  ); /* 정보 박스 뒷배경을 10픽셀만큼 흐리게 만드는 유리 질감 효과 */
-  -webkit-backdrop-filter: blur(
-    10px
-  ); /* Safari 브라우저 호환성을 위한 백드롭 필터 적용 */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* 박스 테두리에 흐린 실선 추가 */
-  border-radius: 25px; /* 박스 모서리를 25픽셀만큼 둥글게 만듦 */
-  padding: 40px; /* 박스 내부 사방에 40픽셀의 넉넉한 여백 지정 */
-  margin-bottom: 45px; /* 정보 박스 아래쪽에 45픽셀의 바깥 여백 확보 */
-  transition: 0.3s; /* 호버 시 테두리와 배경 변화가 0.3초간 부드럽게 일어나도록 설정 */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 25px;
+  padding: 40px;
+  margin-bottom: 45px;
+  transition: 0.3s;
 }
 
-/* 정보 박스 호버 시 테두리가 미세하게 밝아짐 */
 .info-box:hover {
-  border-color: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 마우스를 올리면 테두리가 미세한 네온 그린빛으로 변경 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.06
-  ); /* 마우스를 올리면 배경 투명도를 6%로 아주 살짝 올려 밝게 만듦 */
+  border-color: rgba(158, 255, 122, 0.15);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .info-box h2 {
-  font-size: 28px; /* 소제목 글자 크기를 28픽셀로 설정 */
-  color: #9eff7a; /* 소제목 글자 색상을 네온 그린으로 지정 */
-  margin-bottom: 20px; /* 소제목 아래쪽 문단과의 간격을 위해 20픽셀 여백 추가 */
-  display: flex; /* 내부 아이콘이나 텍스트 정렬을 유연하게 하기 위해 플렉스 박스 적용 */
-  align-items: center; /* 세로 기준 정중앙 정렬 */
+  font-size: 28px;
+  color: #9eff7a;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .info-box p {
-  font-size: 16px; /* 본문 글자 크기를 16픽셀로 설정 */
-  line-height: 1.8; /* 줄간격을 글자 크기의 1.8배로 넓혀 시각적 가독성 대폭 향상 */
-  color: #ccc; /* 텍스트 색상을 약간 밝은 회색(#ccc)으로 지정 */
-  margin-bottom: 12px; /* 문단과 문단 사이의 수직 간격을 위해 아래쪽에 12픽셀 여백 추가 */
+  font-size: 16px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 12px;
 }
 
-/* 박스 내부의 마지막 문단은 하단 마진을 제거하여 레이아웃 균형 유지 */
 .info-box p:last-child {
-  margin-bottom: 0; /* 마지막으로 온 <p> 태그는 아래쪽 여백(margin-bottom)을 0으로 만들어 박스가 불필요하게 커지는 것을 방지 */
+  margin-bottom: 0;
 }
 
-/* 추천 매장 리스트 스타일링 */
 .info-box ul {
-  list-style: none; /* 기본 HTML 리스트가 가지는 보기 싫은 검은색 원형 불릿(점) 제거 */
+  list-style: none;
 }
 
 .info-box li {
-  font-size: 16px; /* 리스트 아이템 글자 크기 16픽셀 */
-  line-height: 1.8; /* 리스트 줄간격 1.8배 */
-  color: #ccc; /* 리스트 글자 색상 밝은 회색 */
-  margin-bottom: 10px; /* 각 리스트 항목 사이의 수직 간격을 위해 아래에 10픽셀 여백 추가 */
-  padding-left: 20px; /* 왼쪽에 커스텀 불릿 기호가 배치될 수 있도록 20픽셀만큼 안쪽 여백 확보 */
-  position: relative; /* 가상 요소(::before) 불릿이 absolute 위치를 잡을 수 있게 기준점이 됨 */
+  font-size: 16px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative; /* 자식 요소가 absolute 위치를 쓸 때 기준점이 되는 속성 */
 }
 
-/* CSS 가상 요소를 이용한 테마 맞춤형 불릿(•) 생성 */
+/* 가상 요소: HTML 수정 없이 CSS만으로 li 앞에 • 기호를 추가하는 방법 */
 .info-box li::before {
-  content: "•"; /* 리스트 글자 앞에 '•' 문자형 콘텐츠를 강제로 삽입 */
-  color: #9eff7a; /* 삽입된 불릿 기호의 색상을 포인트 네온 그린으로 지정 */
-  font-weight: bold; /* 불릿 기호를 두껍게 만들어 눈에 띄게 함 */
-  position: absolute; /* 기준점인 <li> 태그의 왼쪽 공간에 절대 좌표로 배치 */
-  left: 0; /* 정확히 <li>의 가장 왼쪽 끝(0)에 부착 */
+  content: "•";
+  color: #9eff7a;
+  font-weight: bold;
+  position: absolute; /* 부모(li)의 position: relative 기준으로 원하는 위치에 정확히 배치 */
+  left: 0;
 }
 
-/* 추천 매장 외부 링크용 스타일 */
 .info-box li a {
-  color: #9eff7a; /* 링크 텍스트 색상을 네온 그린으로 설정 */
-  text-decoration: none; /* 링크의 기본 밑줄 장식 제거 */
-  font-weight: bold; /* 링크를 두껍게 만들어 클릭 가능한 요소임을 강조 */
-  transition: opacity 0.2s ease; /* 마우스를 올릴 때 투명도 변화가 0.2초 동안 부드럽게 나타나도록 함 */
+  color: #9eff7a;
+  text-decoration: none;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
 }
 
 .info-box li a:hover {
-  text-decoration: underline; /* 마우스를 올리면 링크에 밑줄이 나타나도록 처리 */
-  opacity: 0.85; /* 마우스를 올리면 투명도를 85%로 낮춰 살짝 흐려지는 시각적 피드백 제공 */
+  text-decoration: underline;
+  opacity: 0.85;
 }
 
 /* ==========================================================================
    06. 유전 형태 분류 및 모프 카드 그리드 (MORPH SECTION)
    ========================================================================== */
 .morph-section {
-  margin-bottom: 50px; /* 모프 구역 전체 아래쪽에 50픽셀의 여백 추가 */
+  margin-bottom: 50px;
 }
 
 .morph-section h2 {
-  font-size: 28px; /* 섹션 제목 글자 크기를 28픽셀로 설정 */
-  color: #9eff7a; /* 제목 색상을 네온 그린으로 설정 */
-  margin-bottom: 25px; /* 아래쪽 그리드 레이아웃과의 간격을 위해 25픽셀 여백 추가 */
+  font-size: 28px;
+  color: #9eff7a;
+  margin-bottom: 25px;
 }
 
-/* 반응형 모프 카드 배열 시스템 */
 .morph-grid {
-  display: grid; /* 격자(Grid) 레이아웃 모드 활성화 */
-  /* 카드가 최소 320px 너비를 유지하며, 화면이 넓어지면 빈 공간을 균등하게 꽉 채워(auto-fit) 행을 구성하도록 자동 계산 */
+  display: grid; /* 격자 형태로 요소를 배치하는 레이아웃 */
+  /* 카드가 최소 320px을 유지하면서, 화면 너비에 따라 한 줄에 들어갈 수 있는 만큼 자동으로 배치 */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px; /* 카드와 카드 사이의 가로세로 공간을 30픽셀로 고정 */
+  gap: 30px;
 }
 
-/* 개별 모프 안내 카드 */
 .morph-card {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.04
-  ); /* 카드 기본 배경색을 투명도 4%의 흰색으로 설정 */
-  backdrop-filter: blur(10px); /* 카드 뒷배경을 흐리게 하는 유리 질감 효과 */
-  -webkit-backdrop-filter: blur(
-    10px
-  ); /* Safari 브라우저 호환성용 백드롭 필터 */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* 카드 외곽 테두리에 흐린 선 추가 */
-  border-radius: 25px; /* 카드 테두리 모서리를 25픽셀만큼 둥글게 라운딩 */
-  overflow: hidden; /* 상단에 배치되는 썸네일 이미지의 둥근 모서리 밖으로 삐져나오는 부분을 잘라냄 */
-  transition: 0.3s ease; /* 호버 시 일어나는 변화들을 0.3초간 자연스럽게(ease) 처리 */
-  display: flex; /* 카드 내부 구성 요소를 정렬하기 위해 플렉스 박스 사용 */
-  flex-direction: column; /* 썸네일 이미지, 제목, 설명, 가격 순으로 위에서 아래로 세로 배열 */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 25px;
+  overflow: hidden; /* 자식 요소가 border-radius 밖으로 삐져나오는 부분을 잘라냄 */
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column; /* flex 자식 요소들을 가로가 아닌 세로(위→아래) 방향으로 쌓음 */
 }
 
-/* 모프 카드 호버 효과 */
 .morph-card:hover {
-  transform: translateY(
-    -8px
-  ); /* 마우스를 올리면 카드가 부드럽게 위쪽(Y축)으로 8픽셀 붕 떠오름 */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.04
-  ); /* 카드 배경색에 은은한 네온 그린 빛(4%)이 감돌도록 변경 */
-  border-color: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 카드 테두리 선을 네온 그린빛(30%)으로 선명하게 강조 */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* 카드 뒤쪽에 어둡고 넓은 그림자를 깔아 붕 떠오른 입체감 완성 */
+  transform: translateY(-8px);
+  background: rgba(158, 255, 122, 0.04);
+  border-color: rgba(158, 255, 122, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-/* 모프 카드 썸네일 이미지 */
 .morph-img {
-  width: 100%; /* 이미지 가로 너비를 카드 너비에 100% 가득 채움 */
-  height: 220px; /* 이미지 세로 높이를 220픽셀로 고정 */
-  object-fit: cover; /* 원본 이미지 비율을 유지하며 고정된 220px 상자에 꽉 차도록 이미지 중심을 잘라 정렬 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 이미지와 아래쪽 텍스트 구역 사이에 은은한 경계선 추가 */
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* 모프 이름 (제목) */
 .morph-card h3 {
-  padding: 25px 25px 10px 25px; /* 제목 텍스트 안쪽 여백 (위25, 우25, 아래10, 좌25) */
-  font-size: 22px; /* 제목 글자 크기를 22픽셀로 설정 */
-  color: #ffffff; /* 평상시 제목 글자 색상은 흰색 */
+  padding: 25px 25px 10px 25px;
+  font-size: 22px;
+  color: #ffffff;
 }
 
-/* 카드가 호버되면 제목 텍스트도 세트로 네온 그린으로 변경 */
 .morph-card:hover h3 {
-  color: #9eff7a; /* 마우스가 카드에 올라오면 글자 색상이 네온 그린으로 변경되어 시선 집중 */
+  color: #9eff7a;
 }
 
-/* 모프 소개 및 유전 특징 설명 */
 .morph-card p {
-  padding: 0 25px; /* 양 옆에만 25픽셀의 안쪽 여백을 주고 상하는 여백 없음 */
-  font-size: 15px; /* 설명 텍스트 글자 크기를 15픽셀로 설정 */
-  line-height: 1.6; /* 줄간격을 1.6배로 설정하여 쾌적한 가독성 확보 */
-  color: #aaa; /* 설명 글자 색상을 연한 회색으로 설정 */
-  flex-grow: 1; /* [실무 핵심] 설명글이 짧아도 빈 공간을 이 <p> 태그가 다 밀고 늘어나서, 다음 요소인 가격 영역이 항상 카드 맨 밑바닥에 딱 맞게 정렬되도록 유도함 */
+  padding: 0 25px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #aaa;
+  flex-grow: 1; /* 남은 공간을 이 요소가 다 차지해서, 가격 영역이 항상 카드 맨 아래 고정되게 함 */
 }
 
-/* 대략적인 분양가 또는 가치 표시 스타일 */
 .price {
-  display: block; /* 줄바꿈이 확실하게 일어나도록 블록 요소로 변경 */
-  padding: 20px 25px 25px 25px; /* 가격 영역 안쪽 여백 설정 (위20, 우25, 아래25, 좌25) */
-  color: #9eff7a; /* 가격 글자 색상을 포인트 네온 그린으로 설정 */
-  font-size: 16px; /* 글자 크기 16픽셀 */
-  font-weight: bold; /* 가격을 두껍게 설정하여 가독성 강화 */
+  display: block;
+  padding: 20px 25px 25px 25px;
+  color: #9eff7a;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 /* ==========================================================================
    07. 모바일 리스폰시브 반응형 레이아웃 (MOBILE RESPONSIVE)
    ========================================================================== */
-/* 미디어 쿼리: 브라우저 화면의 최대 가로 너비가 768px 이하(태블릿 및 스마트폰)일 때만 작동하는 규칙 */
+/* 화면 너비가 768px 이하일 때(태블릿, 스마트폰)만 아래 규칙이 적용됨 */
 @media (max-width: 768px) {
-  /* 상단 헤더 패딩 축소 */
   .header {
-    padding: 15px 25px; /* 화면이 좁은 모바일에 맞춰 헤더 내부 여백을 줄임 (위아래 15px, 좌우 25px) */
+    padding: 15px 25px;
   }
 
   .header h1 {
-    font-size: 20px; /* 모바일 화면에 맞춰 타이틀 글자 크기를 20픽셀로 축소 */
+    font-size: 20px;
   }
 
-  /* 본문 상단 여백 조정 */
   .container {
-    padding-top: 110px; /* 헤더 높이가 줄어들었으므로 본문 윗여백도 110픽셀로 맞춰서 줄임 */
+    padding-top: 110px;
   }
 
-  /* 너무 긴 대형 이미지를 모바일 화면에 맞춰 아담하게 조정 */
   .hero-img {
-    height: 250px; /* 화면이 작은 모바일에서 600px은 너무 크므로 이미지 높이를 250픽셀로 콤팩트하게 줄임 */
-    border-radius: 15px; /* 둥근 테두리 반경도 화면 크기에 맞게 15픽셀로 줄임 */
+    height: 250px;
+    border-radius: 15px;
   }
 
-  /* 내부 여백 슬림화 및 테두리 반경 최적화 */
   .info-box {
-    padding: 25px; /* 정보 상자 내부 여백을 25픽셀로 좁혀서 콘텐츠 영역 확보 */
-    border-radius: 15px; /* 모서리 반경도 15픽셀로 모바일에 맞춤 수정 */
+    padding: 25px;
+    border-radius: 15px;
   }
 
-  /* [핵심] 모프 그리드를 무조건 가로 1열(1fr)로 배치하여 리스트 형태로 전환 */
   .morph-grid {
-    grid-template-columns: 1fr; /* 카드가 더 이상 옆으로 배열되지 않고 무조건 한 줄에 1개(1fr)씩만 꽉 차게 나열되도록 리스트화 */
-    gap: 20px; /* 카드 사이의 간격을 20픽셀로 좁힘 */
+    grid-template-columns: 1fr; /* 1fr = 한 줄에 카드 1개만. 리스트처럼 세로로 쌓임 */
+    gap: 20px;
   }
 }

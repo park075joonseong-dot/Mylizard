@@ -1,328 +1,254 @@
 /* ==========================================================================
    01. 글로벌 기본 초기화 및 기본 톤 설정 (RESET & BODY)
    ========================================================================== */
+
 * {
-  margin: 0; /* 문서 전체 요소의 기본 바깥 여백(여백)을 0으로 초기화 */
-  padding: 0; /* 문서 전체 요소의 기본 안쪽 여백(패딩)을 0으로 초기화 */
-  box-sizing: border-box; /* 요소의 너비(width)에 패딩과 테두리를 포함시켜 크기가 커지지 않게 고정 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 패딩과 테두리를 너비 계산에 포함시켜 레이아웃이 깨지는 것을 방지합니다. */
 }
 
-/* BODY: 이미지 제거 및 모던한 블랙 배경 설정 */
 body {
-  background-color: #121212; /* 웹사이트 전체 배경을 어두운 다크 그레이(#121212)로 설정 */
-  font-family: sans-serif; /* 글꼴을 삐침이 없는 깔끔한 고딕 계열(sans-serif)로 지정 */
-  color: white; /* 어두운 배경에서 글씨가 잘 보이도록 기본 글자 색상을 흰색으로 설정 */
+  background-color: #121212;
+  font-family: sans-serif;
+  color: white;
 }
 
 /* ==========================================================================
    02. 상단 고정 헤더 영역 (HEADER)
    ========================================================================== */
+
 .gallery-header {
-  width: 100%; /* 헤더의 가로 너비를 화면 전체(100%)로 설정 */
-  height: 80px; /* 헤더의 세로 높이를 80픽셀로 고정 */
-  position: fixed; /* 스크롤을 내려도 화면 상단 특정 위치에 항상 고정시킴 */
-  top: 0; /* 화면의 가장 맨 위(0)에 밀착 */
-  left: 0; /* 화면의 가장 왼쪽(0)에 밀착 */
-  z-index: 1000; /* 숫자가 클수록 위로 올라옴 (본문 콘텐츠가 헤더 위를 덮지 못하도록 방지) */
-  background: rgba(
-    18,
-    18,
-    18,
-    0.8
-  ); /* 검은색(#121212 -> 18,18,18) 배경에 80% 투명도(0.8) 적용 */
+  width: 100%;
+  height: 80px;
+  position: fixed; /* 스크롤 위치에 상관없이 화면 상단에 항상 고정시킵니다. */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 본문 콘텐츠가 스크롤 될 때 헤더 위로 겹쳐서 올라오는 현상을 막아줍니다. */
+  background: rgba(18, 18, 18, 0.8);
   backdrop-filter: blur(
     10px
-  ); /* 헤더 뒷배경을 지나가는 콘텐츠를 10픽셀만큼 흐리게(Blur) 처리하여 고급스러운 느낌 연출 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 헤더 아래쪽에 아주 은은한 흰색 실선 테두리 추가 */
-  padding: 0 50px; /* 헤더 내부의 좌우에만 50픽셀의 안쪽 여백을 줌 (상하는 0) */
-  display: flex; /* 내부 요소들을 정렬하기 위해 플렉스 박스 레이아웃 활성화 */
-  justify-content: space-between; /* 양 끝 정렬 (왼쪽에는 로고, 오른쪽에는 홈 버튼이 가도록 배치) */
-  align-items: center; /* 플렉스 박스 안의 아이템들을 세로 기준 정중앙에 정렬 */
+  ); /* 헤더 뒤로 비치는 본문 배경을 유리스럽게 흐리게(Blur) 만듭니다. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 50px;
+  display: flex; /* 내부 요소(로고, 버튼)의 정렬을 위해 플렉스 박스를 활성화합니다. */
+  justify-content: space-between; /* 로고는 왼쪽 끝, 홈 버튼은 오른쪽 끝으로 양끝 배치합니다. */
+  align-items: center; /* 세로 기준 정중앙 정렬을 맞춥니다. */
 }
 
 .logo {
-  font-size: 32px; /* 로고의 글자 크기를 32픽셀로 크게 키움 */
-  font-weight: bold; /* 로고 글자를 두껍게 설정 */
-  color: #ffffff; /* 로고 글자 색상을 순수 흰색으로 설정 */
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-/* [컴포넌트] 홈으로 버튼 스타일 */
 .home-btn {
-  text-decoration: none; /* <a> 태그 특유의 밑줄을 제거 */
-  color: #9eff7a; /* 글자 색상을 포인트 컬러인 네온 그린(#9eff7a)으로 설정 */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 네온 그린 색상에 15% 투명도를 넣은 배경색 지정 */
-  padding: 10px 20px; /* 버튼 내부 여백 (위아래 10픽셀, 좌우 20픽셀) */
-  border-radius: 12px; /* 버튼 모서리를 12픽셀만큼 둥글게 깎음 */
-  font-size: 16px; /* 버튼 글자 크기를 16픽셀로 설정 */
-  font-weight: bold; /* 버튼 글자를 두껍게 설정 */
-  transition: 0.3s; /* 마우스를 올리거나 뗄 때 변화가 0.3초 동안 부드럽게 일어나도록 설정 */
+  text-decoration: none;
+  color: #9eff7a;
+  background: rgba(158, 255, 122, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .home-btn:hover {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.3
-  ); /* 마우스를 올렸을 때 배경 투명도를 30%로 올려 더 진하게 만듦 */
+  background: rgba(158, 255, 122, 0.3);
   transform: translateY(
     -2px
-  ); /* 마우스를 올렸을 때 Y축(위쪽)으로 2픽셀만큼 살짝 띄움 */
+  ); /* 호버 시 버튼을 위로 2픽셀 살짝 띄워 입체감을 줍니다. */
 }
 
 /* ==========================================================================
    03. 메인 콘텐츠 및 업로드 양식 영역 (MAIN & UPLOAD SECTION)
    ========================================================================== */
+
 main {
-  padding-top: 130px; /* 헤더가 고정(fixed)되어 있어 본문이 가려지므로, 본문 위쪽에 130픽셀의 여백을 확보 */
+  padding-top: 130px; /* 고정(fixed)된 헤더가 본문 영역을 가리지 않도록 상단 여백을 확보합니다. */
 }
 
-/* UPLOAD SECTION: 입력 창 구역 디자인 개선 */
 .upload-section {
-  width: 1200px; /* 업로드 영역의 전체 가로 폭을 1200픽셀로 제한 */
-  margin: 0 auto; /* 위아래 여백은 0, 좌우는 알아서(auto) 배분하여 화면 정중앙에 정렬 */
-  padding: 20px 30px; /* 박스 내부 여백 (위아래 20픽셀, 좌우 30픽셀) */
+  width: 1200px;
+  margin: 0 auto; /* 가로 폭이 고정되어 있을 때 좌우 마진을 auto로 주어 화면 중앙에 배치합니다. */
+  padding: 20px 30px;
 }
 
-/* 파일 선택, 텍스트 입력창, 업로드 버튼을 감싸는 박스 틀 */
 .upload-wrap {
-  display: flex; /* 내부 입력 요소들을 가로로 나란히 배치하기 위해 플렉스 박스 사용 */
-  justify-content: center; /* 내부 요소들을 가로 기준 정중앙에 정렬 */
-  align-items: center; /* 내부 요소들을 세로 기준 정중앙에 정렬 */
-  gap: 20px; /* 정렬된 요소와 요소 사이의 간격을 20픽셀로 띄움 */
-  flex-wrap: wrap; /* 화면이 좁아지면 내부 요소들이 깨지지 않고 자연스럽게 다음 줄로 넘어가도록 설정 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.03
-  ); /* 흰색 배경에 투명도 3%만 주어 아주 은은한 유리 질감 표현 */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* 박스 테두리에 은은한 흰색 선 추가 */
-  padding: 20px; /* 박스 내부 전체에 20픽셀 여백 */
-  border-radius: 20px; /* 박스 테두리 모서리를 20픽셀만큼 둥글게 만듦 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* 모바일 등 화면이 좁아질 때 내부 입력 창들이 깨지지 않고 자연스럽게 다음 줄로 내려가게 합니다. */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 20px;
 }
 
-/* [컴포넌트] 디자인 커스텀된 파일 선택 버튼 스타일 */
 .file-btn {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.15
-  ); /* 네온 그린 색상에 15% 투명도를 준 배경색 */
-  color: #9eff7a; /* 글자 색상을 네온 그린으로 지정 */
-  padding: 12px 24px; /* 버튼 안쪽 여백 (위아래 12픽셀, 좌우 24픽셀) */
-  border-radius: 12px; /* 모서리를 12픽셀만큼 라운딩 처리 */
-  cursor: pointer; /* 마우스를 올렸을 때 클릭할 수 있는 손가락 모양 아이콘으로 변경 */
-  font-weight: bold; /* 글자를 두껍게 설정 */
-  font-size: 15px; /* 글자 크기를 15픽셀로 설정 */
-  transition: 0.3s; /* 상태 변화 시 0.3초 동안 부드럽게 애니메이션 작동 */
+  background: rgba(158, 255, 122, 0.15);
+  color: #9eff7a;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s;
 }
 
 .file-btn:hover {
-  background: rgba(
-    158,
-    255,
-    122,
-    0.25
-  ); /* 마우스를 올렸을 때 배경 투명도를 25%로 높임 */
-  transform: translateY(-2px); /* 버튼을 위로 2픽셀 살짝 띄움 */
+  background: rgba(158, 255, 122, 0.25);
+  transform: translateY(-2px);
 }
 
-/* 선택된 파일명을 띄워주는 텍스트 */
 #fileName {
-  color: #aaa; /* 파일명 텍스트 색상을 차분한 밝은 회색(#aaa)으로 설정 */
-  font-size: 15px; /* 글자 크기를 15픽셀로 설정 */
+  color: #aaa;
+  font-size: 15px;
 }
 
-/* [컴포넌트] 사진 설명 입력란 (Input Text) */
 #imageText {
-  padding: 12px 20px; /* 인풋창 안쪽 여백 (위아래 12픽셀, 좌우 20픽셀) */
-  width: 320px; /* 입력창 전체 가로 너비를 320픽셀로 고정 */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* 테두리에 약간 투명한 흰색 선을 그림 */
-  background: rgba(
-    0,
-    0,
-    0,
-    0.3
-  ); /* 입력창 안쪽을 검은색 투명도 30%로 주어 본문보다 한 단계 어둡게 만듦 */
-  border-radius: 12px; /* 모서리를 12픽셀만큼 라운딩 처리 */
-  color: white; /* 사용자가 입력하는 글자 색상을 흰색으로 설정 */
-  font-size: 15px; /* 입력 글자 크기를 15픽셀로 설정 */
-  outline: none; /* 인풋창을 클릭했을 때 브라우저가 자동으로 씌우는 푸른색 강조 선(아웃라인) 제거 */
-  transition: 0.3s; /* 클릭 시 테두리 색상 변화를 0.3초간 부드럽게 처리 */
+  padding: 12px 20px;
+  width: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  outline: none; /* 인풋창 클릭 시 브라우저가 강제로 입히는 푸른색 테두리를 제거합니다. */
+  transition: 0.3s;
 }
 
-/* 입력창을 클릭(focus)했을 때의 포인트 스타일 */
 #imageText:focus {
   border-color: rgba(
     158,
     255,
     122,
     0.5
-  ); /* 클릭 중일 때 테두리 선을 네온 그린색(투명도 50%)으로 강조 */
-  background: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* 클릭 중일 때 배경을 조금 더 어두운 검은색(50%)으로 변경 */
+  ); /* 입력란을 클릭하여 포커스가 활성화되었을 때(:focus) 테두리 색상을 네온 그린으로 바꿉니다. */
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* [컴포넌트] 업로드 실행 버튼 */
 #uploadBtn {
-  background: #9eff7a; /* 버튼 배경을 투명도 없는 순수 네온 그린색으로 가득 채움 */
-  color: #121212; /* 글자 색상을 어두운 다크 그레이로 설정하여 대비감을 줌 */
-  border: none; /* 기본 테두리 선 제거 */
-  padding: 12px 28px; /* 버튼 내부 여백 (위아래 12픽셀, 좌우 28픽셀) */
-  border-radius: 12px; /* 모서리를 12픽셀만큼 라운딩 처리 */
-  cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
-  font-weight: bold; /* 글자를 두껍게 설정 */
-  font-size: 15px; /* 글자 크기를 15픽셀로 설정 */
-  transition: 0.3s; /* 호버 효과가 0.3초 동안 부드럽게 나타나도록 함 */
+  background: #9eff7a;
+  color: #121212;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s;
 }
 
 #uploadBtn:hover {
-  background: #b6ff9c; /* 마우스를 올렸을 때 원래 그린보다 살짝 더 밝은 연두색(#b6ff9c)으로 변경 */
-  transform: translateY(-2px); /* 버튼을 위로 2픽셀 살짝 띄움 */
-  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.3); /* 버튼 밑에 네온 그린 색상의 은은한 그림자(빛나는 효과)를 만듦 */
+  background: #b6ff9c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(158, 255, 122, 0.3); /* 버튼 하단에 은은하게 빛나는 네온 조명 효과를 연출합니다. */
 }
 
-/* 데이터가 없을 때 노출되는 빈 화면 메시지 */
 #emptyMessage {
-  text-align: center; /* 텍스트를 가운데 정렬 */
-  color: #666; /* 글자 색상을 어두운 회색(#666)으로 설정하여 흐리게 처리 */
-  font-size: 18px; /* 글자 크기를 18픽셀로 설정 */
-  margin-top: 60px; /* 업로드 영역과 겹치지 않게 위쪽에 60픽셀 여백 추가 */
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin-top: 60px;
 }
 
 /* ==========================================================================
    04. 갤러리 이미지 그리드 및 카드 레이아웃 (GALLERY GRID & CARD)
    ========================================================================== */
-/* GALLERY GRID: 반응형 그리드 정렬 */
+
 .gallery-grid {
-  width: 1200px; /* 전체 그리드 영역 가로 폭을 1200픽셀로 제한 */
-  margin: 30px auto 80px auto; /* 바깥 여백 (위 30px, 좌우 auto로 중앙 정렬, 아래 80px) */
-  display: grid; /* 격자(Grid) 레이아웃 시스템 사용 */
-  /* 카드가 최소 280px 크기를 유지하고, 화면이 넓어지면 빈 공간을 균등하게 채워서 가로 한 줄을 채우도록 자동 계산(auto-fill) */
+  width: 1200px;
+  margin: 30px auto 80px auto;
+  display: grid; /* 바둑판식(격자) 레이아웃 시스템을 시작합니다. */
+  /* [미디어쿼리 대체 기술] 카드 최소 너비를 280px로 보장하되, 화면이 넓어지면 열 개수가 자동으로 늘어나며 남은 공간을 균등(1fr) 배분합니다. */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px; /* 카드와 카드 사이의 상하좌우 간격을 25픽셀로 고정 */
-  padding: 0 30px; /* 그리드 양쪽 끝에 30픽셀 안쪽 여백 추가 */
+  gap: 25px;
+  padding: 0 30px;
 }
 
-/* [컴포넌트] 개별 이미지 카드 외곽 틀 */
 .gallery-card {
-  position: relative; /* 내부에 들어갈 삭제 버튼(.delete-btn)이 absolute 위치를 잡을 수 있도록 기준점이 되어줌 */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.04
-  ); /* 카드 배경을 아주 미세한 투명 흰색(4%)으로 설정 */
-  border: 1px solid rgba(255, 255, 255, 0.03); /* 카드 테두리에 은은한 선 추가 */
-  border-radius: 20px; /* 카드 사각 모서리를 20픽셀만큼 둥글게 만듦 */
-  overflow: hidden; /* 내부에 들어가는 이미지가 직각이더라도 카드의 둥근 모서리(border-radius) 밖으로 튀어나가지 못하게 잘라냄 */
-  transition: 0.3s; /* 마우스를 올렸을 때의 변화를 0.3초 동안 부드럽게 표현 */
+  position: relative; /* 자식 요소인 삭제 버튼(.delete-btn)의 absolute 배치를 위한 기준점(좌표계) 역할을 합니다. */
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  overflow: hidden; /* 모서리는 둥근데 내부의 각진 이미지가 바깥으로 삐져나와 라운딩을 망치는 현상을 방지합니다. */
+  transition: 0.3s;
 }
 
-/* 이미지 카드 마우스 호버 효과 */
 .gallery-card:hover {
-  transform: translateY(-5px); /* 카드가 위로 5픽셀만큼 붕 떠오르는 효과 */
-  background: rgba(
-    158,
-    255,
-    122,
-    0.04
-  ); /* 카드 배경색에 네온 그린 빛이 미세하게 감돌도록 변경 */
-  border-color: rgba(
-    158,
-    255,
-    122,
-    0.2
-  ); /* 카드 테두리 선을 네온 그린 빛으로 살짝 변경 */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 카드 뒤편에 짙고 부드러운 그림자를 깔아서 입체감 극대화 */
+  transform: translateY(-5px);
+  background: rgba(158, 255, 122, 0.04);
+  border-color: rgba(158, 255, 122, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 붕 떠오른 카드 밑으로 짙은 그림자를 깔아 입체감을 극대화합니다. */
 }
 
-/* 카드 내부 썸네일 이미지 스타일 */
 .gallery-card img {
-  width: 100%; /* 이미지 가로 폭을 카드 너비에 100% 꽉 차게 맞춤 */
-  aspect-ratio: 1 / 1; /* 어떤 이미지가 들어와도 가로세로 비율을 강제로 1:1 정정사각형으로 고정 */
-  object-fit: cover; /* 이미지가 1:1 비율로 바뀔 때 찌그러지지 않도록, 비율을 유지하면서 박스에 꽉 차게 중심 기준으로 자름 */
-  display: block; /* 이미지 하단에 브라우저가 기본적으로 가지는 미세한 빈 공간(공백)을 제거하기 위해 블록 요소로 변경 */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 어떤 비율의 사진이 업로드되어도 강제로 가로세로 1:1 정정사각형 비율을 유지시킵니다. */
+  object-fit: cover; /* 중요! 비율이 강제로 바뀔 때 이미지가 찌그러지지 않도록 크롭(잘라내기)하며 정중앙을 채워줍니다. */
+  display: block; /* 인라인 이미지 요소 특유의 하단 미세한 공백(빈 공간)을 제거합니다. */
 }
 
-/* 이미지 아래 하단 텍스트 및 설명 구역 */
 .card-info {
-  padding: 20px; /* 글자가 카드 테두리에 붙지 않도록 사방에 20픽셀 여백 설정 */
+  padding: 20px;
 }
 
-/* 사용자가 입력한 사진 설명 텍스트 */
 .gallery-card p {
-  text-align: left; /* 텍스트를 왼쪽 정렬 */
-  font-size: 16px; /* 글자 크기를 16픽셀로 설정 */
-  line-height: 1.5; /* 줄간격을 글자 크기의 1.5배로 설정하여 읽기 편하게 함 */
-  color: #bbb; /* 설명 글자 색상을 연한 회색으로 지정 */
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #bbb;
 
-  /* [실무 활용] 설명 글이 너무 길어져도 최대 두 줄까지만 보여주고 끝에 (...) 처리하는 구형 웹킷 엔진 방식 */
-  display: -webkit-box; /* 요소를 웹킷 기반 플렉스 박스 형태로 만듦 */
-  -webkit-box-orient: vertical; /* 텍스트 배치 방향을 세로로 설정 */
-  -webkit-line-clamp: 2; /* 최대 노출 줄 수를 2줄로 제한 */
-  overflow: hidden; /* 2줄을 넘어가서 삐져나오는 나머지 글자들은 화면에서 숨김 */
-  min-height: 48px; /* 한 줄짜리 짧은 글이 들어와도 카드의 텍스트 영역 높이가 고정되어 카드가 찌그러지지 않게 방지 */
+  /* [실무 핵심: 2줄 말줄임표 세트] 글이 길어지면 자동으로 두 줄까지만 띄우고 그 뒤에 '...'을 붙여주는 치트키 서식입니다. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical; /* 텍스트 정렬 방향을 세로로 지정 */
+  -webkit-line-clamp: 2; /* 보여줄 최대 텍스트 줄 수 제한 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  min-height: 48px; /* 한 줄짜리 짧은 글이 와도 텍스트 영역의 최소 높이를 고정해 전체 카드의 크기가 찌그러지지 않게 방어합니다. */
 }
 
 /* ==========================================================================
    05. 카드 내부 개별 삭제 버튼 (DELETE BUTTON)
    ========================================================================== */
+
 .delete-btn {
-  position: absolute; /* 기준점인 .gallery-card 박스를 기준으로 절대적인 위치에 배치 */
-  top: 15px; /* 카드 위쪽 테두리로부터 15픽셀 아래로 배치 */
-  right: 15px; /* 카드 오른쪽 테두리로부터 15픽셀 왼쪽으로 배치 */
-  width: 32px; /* 버튼 가로 크기 32픽셀 */
-  height: 32px; /* 버튼 세로 크기 32픽셀 */
-  border: none; /* 기본 테두리 제거 */
-  border-radius: 50%; /* 가로세로가 같으므로 50% 값을 주어 완벽한 원형 버튼으로 만듦 */
-  background: rgba(
-    18,
-    18,
-    18,
-    0.75
-  ); /* 검은 배경색에 75% 투명도를 주어 뒤쪽 이미지가 살짝 비치게 함 */
-  backdrop-filter: blur(
-    5px
-  ); /* 삭제 버튼 너머 뒤쪽 이미지를 5픽셀만큼 살짝 흐리게 처리 */
-  color: #ff6b6b; /* 'X' 아이콘 색상을 경고/삭제를 의미하는 파스텔톤 레드(#ff6b6b)로 설정 */
-  font-size: 14px; /* 'X' 아이콘 글자 크기 */
-  font-weight: bold; /* 두껍게 처리 */
-  cursor: pointer; /* 마우스 올리면 손가락 모양 커서로 변경 */
+  position: absolute; /* 부모인 .gallery-card의 왼쪽 위 꼭짓점을 기준으로 절대적인 좌표값을 가집니다. */
+  top: 15px; /* 부모 카드 위쪽 면에서 15px 아래로 배치 */
+  right: 15px; /* 부모 카드 오른쪽 면에서 15px 왼쪽으로 배치 */
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%; /* 가로세로 값이 같을 때 50%를 적용하면 정원형(동그라미) 버튼이 됩니다. */
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(5px);
+  color: #ff6b6b;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 
-  /* 초기 상태: 평소에는 숨겨둠 */
-  opacity: 0; /* 투명도를 0으로 만들어 완전히 투명하게 숨김 */
-  visibility: hidden; /* 투명도가 0이어도 클릭될 수 있으므로 기능적으로도 완전히 숨김 처리 */
-  transition: 0.2s; /* 마우스를 올렸을 때 나타나는 속도를 0.2초로 빠르게 설정 */
+  /* [중요: 평소 투명 상태 숨기기] */
+  opacity: 0; /* 눈에 보이지 않게 투명 처리합니다. */
+  visibility: hidden; /* opacity가 0이어도 마우스 클릭이 되는 현상을 막기 위해 기능적으로도 완벽히 숨겨둡니다. */
+  transition: 0.2s;
 
-  /* 버튼 내부의 '✕' 아이콘을 원 정중앙에 정렬 */
-  display: flex; /* 플렉스 레이아웃 사용 */
-  align-items: center; /* 세로 기준 정중앙 정렬 */
-  justify-content: center; /* 가로 기준 정중앙 정렬 */
+  /* 버튼 내부의 '✕' 문자 기호를 완전한 중앙에 놓기 위해 플렉스 정렬을 활용합니다. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* [기능 적용] 마우스가 이미지 카드(.gallery-card) 전체에 올라갔을(hover) 때만 자식인 삭제 버튼이 짜잔 등장 */
+/* [조건부 등장] 이미지 카드(.gallery-card) 전체에 마우스를 올렸을 때(hover), 그 자식 요소인 삭제 버튼(.delete-btn)만 조절합니다. */
 .gallery-card:hover .delete-btn {
-  opacity: 1; /* 투명도를 1로 올려 선명하게 보임 */
-  visibility: visible; /* 기능적으로 숨겨져 있던 버튼을 다시 활성화 */
+  opacity: 1; /* 투명도를 풀어 선명하게 노출시킵니다. */
+  visibility: visible; /* 숨겨져 있던 버튼의 마우스 상호작용 기능을 다시 활성화합니다. */
 }
 
-/* 삭제 버튼 마우스 호버 효과 */
 .delete-btn:hover {
-  background: #ff6b6b; /* 마우스가 삭제 버튼 자체에 올라가면 배경색이 빨간색으로 가득 참 */
-  color: white; /* 'X' 아이콘은 대조되도록 흰색으로 변경 */
+  background: #ff6b6b; /* 삭제 버튼 자체에 마우스가 올라가면 배경을 붉게 반전시킵니다. */
+  color: white;
   transform: scale(
     1.05
-  ); /* 버튼 크기가 1.05배로 아주 미세하게 커지면서 강조되는 연출 */
+  ); /* 버튼이 살짝 커지는 효과를 더해 직관적인 피드백을 줍니다. */
 }
